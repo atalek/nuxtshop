@@ -1,0 +1,64 @@
+import { defineStore } from 'pinia'
+import { PlaceOrder, Order, PaymentIntent } from '~/types'
+
+export const useOrderStore = defineStore({
+  id: 'order',
+  actions: {
+    async placeOrder(order: PlaceOrder) {
+      try {
+        const response = await $fetch('/api/orders', {
+          method: 'POST',
+          body: JSON.stringify(order),
+          headers: { 'Content-Type': 'application/json' },
+        })
+
+        if (response) {
+          // @ts-ignore
+          const orderId: string = response.createdOrder._id as string
+          navigateTo(`/order/${orderId}`)
+        }
+      } catch (error) {
+        throw error
+      }
+    },
+    async fetchMyOrders(): Promise<Order[]> {
+      try {
+        const response = await $fetch('/api/orders/myorder')
+
+        return response as Order[]
+      } catch (error) {
+        throw error
+      }
+    },
+    async fetchSingleOrder(orderId: string) {
+      try {
+        const { data, pending, error, refresh } = await useFetch(
+          `/api/orders/order/${orderId}`
+        )
+
+        return { data, pending, error, refresh }
+      } catch (error) {
+        throw error
+      }
+    },
+    async payOrder(orderId: string, paymentIntent: PaymentIntent) {
+      try {
+        await $fetch(`/api/orders/order/${orderId}/pay`, {
+          method: 'POST',
+          body: paymentIntent,
+        })
+      } catch (error) {
+        throw error
+      }
+    },
+    async deliverOrder(orderId: string) {
+      try {
+        await $fetch(`/api/orders/order/${orderId}/delivered`, {
+          method: 'PUT',
+        })
+      } catch (error) {
+        throw error
+      }
+    },
+  },
+})
