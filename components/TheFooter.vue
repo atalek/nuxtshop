@@ -7,7 +7,7 @@ const currentYear = new Date().getFullYear()
     <div class="container">
       <div class="row">
         <div class="col text-center py-3">
-          <p>ProShop &copy; {{ currentYear }}</p>
+          <p>NuxtShop &copy; {{ currentYear }}</p>
         </div>
       </div>
     </div>
