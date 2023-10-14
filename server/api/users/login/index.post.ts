@@ -30,7 +30,7 @@ export default defineEventHandler(async event => {
   } catch (error: any) {
     throw createError({
       statusCode: error.statusCode || 500,
-      statusMessage: error.statusMessage || 'An error occurred',
+      statusMessage: error.data.message || 'An error occurred',
     })
   }
 })

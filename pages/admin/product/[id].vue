@@ -38,7 +38,7 @@ async function updateProduct() {
       await productStore.updateProduct(productId, updateData)
       navigateTo('/admin/productlist')
     } catch (error: any) {
-      toast.error(error.statusMessage)
+      toast.error(error.data.message)
     }
   }
 }

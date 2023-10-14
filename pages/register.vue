@@ -29,7 +29,7 @@ async function submitHandler() {
         navigateTo(redirect as RouteLocationRaw)
       }
     } catch (error: any) {
-      toast.error(error.statusMessage)
+      toast.error(error.data.message)
     }
   }
 }

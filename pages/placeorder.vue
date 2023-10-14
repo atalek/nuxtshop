@@ -25,7 +25,7 @@ async function placeOrderHandler() {
     await orderStore.placeOrder(order)
     cartStore.clearCart()
   } catch (error: any) {
-    toast.error(error.statusMessage)
+    toast.error(error.data.message)
   }
 }
 </script>

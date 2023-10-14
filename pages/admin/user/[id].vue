@@ -27,7 +27,7 @@ async function updateUser() {
       await adminStore.updateUser(userId, updateData)
       navigateTo(`/admin/userlist`)
     } catch (error: any) {
-      toast.error(error.statusMessage)
+      toast.error(error.data.message)
     }
   }
 }

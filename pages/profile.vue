@@ -33,7 +33,7 @@ async function submitHandler() {
       confirmPassword.value = ''
       toast.success('Profile updated successfully')
     } catch (error: any) {
-      toast.error(error.statusMessage)
+      toast.error(error.data.message)
     }
   }
 }

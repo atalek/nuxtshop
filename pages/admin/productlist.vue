@@ -31,7 +31,7 @@ async function createProduct() {
         refresh()
         toast.success('Product created')
       } catch (error: any) {
-        toast.error(error.statusMessage)
+        toast.error(error.data.message)
       }
     }
   }
@@ -46,7 +46,7 @@ async function deleteHandler(productId: string) {
       refresh()
       toast.success('Product deleted')
     } catch (error: any) {
-      toast.error(error.statusMessage)
+      toast.error(error.data.message)
     }
   }
 }
