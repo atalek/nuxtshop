@@ -23,7 +23,7 @@ async function submitHandler() {
       navigateTo(redirect as RouteLocationRaw)
     }
   } catch (error: any) {
-    toast.error(error.statusText)
+    toast.error('Invalid username or password!')
   }
 }
 
