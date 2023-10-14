@@ -41,7 +41,7 @@ async function payOrder() {
   })
 
   if (result.error) {
-    showError(result.error.data.message)
+    toast.error(result.error.data.message)
   } else {
     await orderStore.payOrder(orderId, paymentIntent)
 
