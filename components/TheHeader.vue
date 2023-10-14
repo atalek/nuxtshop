@@ -163,4 +163,8 @@ const isAdminActive = computed(() => {
   display: inline-block;
   text-align: center;
 }
+
+.nav-link.active {
+  color: rgb(67, 238, 67);
+}
 </style>
