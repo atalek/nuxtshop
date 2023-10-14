@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /profile/
+Disallow: /order/
+Disallow: /shipping/
+Disallow: /payment/
+Disallow: /placeorder/
+
+# Allow pages accessible to everyone
+Allow: /public/
