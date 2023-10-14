@@ -17,7 +17,7 @@ useSeoMeta({
   ogUrl: 'https://nuxtshop-yep.vercel.app',
   twitterTitle: 'NuxtShop',
   twitterDescription: 'eCommerce website example built with Nuxt3',
-  twitterImage: '~/assets/nuxt.png',
+  twitterImage: 'https://nuxt.com/assets/design-kit/logo/icon-green.svg',
   twitterCard: 'summary',
 })
 
