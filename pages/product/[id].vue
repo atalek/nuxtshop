@@ -38,7 +38,7 @@ async function createReview() {
       rating.value = 0
       comment.value = ''
     } catch (error: any) {
-      toast.error(error.message)
+      toast.error(error.statusMessage)
     }
   }
 }

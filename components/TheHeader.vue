@@ -11,7 +11,7 @@ async function logoutHandler() {
     authStore.logout()
     cartStore.clear()
   } catch (error: any) {
-    toast.error(error.message)
+    toast.error(error.statusMessage)
   }
 }
 
