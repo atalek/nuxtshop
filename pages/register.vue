@@ -29,7 +29,7 @@ async function submitHandler() {
         navigateTo(redirect as RouteLocationRaw)
       }
     } catch (error: any) {
-      toast.error(error.statusText)
+      toast.error(error.message)
     }
   }
 }
@@ -96,7 +96,13 @@ isLoggedIn()
         />
       </div>
 
-      <button type="submit" class="btn btn-primary mt-2">Register</button>
+      <button
+        type="submit"
+        class="btn btn-primary mt-2"
+        :disabled="!name || !email || !password || !confirmPassword"
+      >
+        Register
+      </button>
     </form>
 
     <div class="row py-3">

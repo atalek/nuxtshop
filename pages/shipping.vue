@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useCartStore } from '~/stores/cart'
 import { useAuthStore } from '~/stores/auth'
-import { ShippingAddress } from 'types'
+import { ShippingAddress } from '~/types'
 
 const cartStore = useCartStore()
 const authStore = useAuthStore()
@@ -25,19 +25,17 @@ function submitHandler() {
   navigateTo('/payment')
 }
 
-if (process.client) {
-  watchEffect(() => {
-    isButtonDisabled.value = !(
-      address.value &&
-      city.value &&
-      postalCode.value &&
-      country.value
-    )
-    if (Object.keys(authStore.userInfo).length === 0) {
-      navigateTo('/login')
-    }
-  })
-}
+watchEffect(() => {
+  isButtonDisabled.value = !(
+    address.value &&
+    city.value &&
+    postalCode.value &&
+    country.value
+  )
+  if (Object.keys(authStore.userInfo).length === 0) {
+    navigateTo('/login')
+  }
+})
 </script>
 
 <template>
