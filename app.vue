@@ -13,7 +13,7 @@ if (process.client) {
 useSeoMeta({
   ogTitle: 'NuxtShop',
   ogDescription: 'eCommerce website example',
-  ogImage: 'n~/assets/nuxt.png',
+  ogImage: '~/assets/nuxt.png',
   ogUrl: 'https://nuxtshop-yep.vercel.app',
   twitterTitle: 'NuxtShop',
   twitterDescription: 'eCommerce website example built with Nuxt3',
