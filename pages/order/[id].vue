@@ -246,9 +246,13 @@ watchEffect(() => {
         </div>
       </div>
       <div class="col mt-5">
-        <p class="text-center" v-show="!order.isPaid">
+        <h5
+          class="text-center my-4 alert alert-primary"
+          role="alert"
+          v-show="!order.isPaid"
+        >
           Use card number 4242 4242 4242 4242 to test payment
-        </p>
+        </h5>
       </div>
     </div>
   </div>
