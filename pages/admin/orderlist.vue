@@ -23,11 +23,11 @@ function refetch(pageNumber: number) {
 }
 
 watchEffect(() => {
-  if (!authStore.userInfo || !authStore.userInfo.isAdmin) {
-    navigateTo('/login')
-  }
   if (error.value.statusCode === 403) {
     authStore.logout()
+  }
+  if (!authStore.userInfo || !authStore.userInfo.isAdmin) {
+    navigateTo('/login')
   }
 })
 </script>
