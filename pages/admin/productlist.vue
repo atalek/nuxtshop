@@ -7,7 +7,7 @@ const authStore = useAuthStore()
 
 const page = ref(1)
 
-const { data, refresh } = await useAsyncData(
+const { data, error, refresh } = await useAsyncData(
   'products',
 
   () =>
@@ -54,6 +54,9 @@ async function deleteHandler(productId: string) {
 watchEffect(() => {
   if (!authStore.userInfo || !authStore.userInfo.isAdmin) {
     navigateTo('/login')
+  }
+  if (error.value.statusCode === 403) {
+    authStore.logout()
   }
 })
 </script>

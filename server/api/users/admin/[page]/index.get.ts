@@ -17,5 +17,10 @@ export default defineEventHandler(async event => {
       .skip(pageSize * (page - 1))
 
     return { users, page, pages: Math.ceil(count / pageSize) }
+  } else {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'Access denied,not an admin',
+    })
   }
 })

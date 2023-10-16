@@ -8,7 +8,7 @@ const adminStore = useAdminStore()
 
 const page = ref(1)
 
-const { data, refresh } = await useAsyncData(
+const { data, error, refresh } = await useAsyncData(
   'users',
   () =>
     $fetch(`/api/users/admin/${page.value}`, {
@@ -38,6 +38,9 @@ async function deleteHandler(userId: string) {
 watchEffect(() => {
   if (!authStore.userInfo || !authStore.userInfo.isAdmin) {
     navigateTo('/login')
+  }
+  if (error.value.statusCode === 403) {
+    authStore.logout()
   }
 })
 </script>

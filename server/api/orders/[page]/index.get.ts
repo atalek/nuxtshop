@@ -19,5 +19,10 @@ export default defineEventHandler(async event => {
       .populate('user', 'id name')
 
     return { orders, page, pages: Math.ceil(count / pageSize) }
+  } else {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'Access denied,not an admin',
+    })
   }
 })

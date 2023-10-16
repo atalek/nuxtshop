@@ -6,7 +6,7 @@ const authStore = useAuthStore()
 
 const page = ref(1)
 
-const { data } = await useAsyncData(
+const { data, error } = await useAsyncData(
   'orders',
 
   () =>
@@ -25,6 +25,9 @@ function refetch(pageNumber: number) {
 watchEffect(() => {
   if (!authStore.userInfo || !authStore.userInfo.isAdmin) {
     navigateTo('/login')
+  }
+  if (error.value.statusCode === 403) {
+    authStore.logout()
   }
 })
 </script>
