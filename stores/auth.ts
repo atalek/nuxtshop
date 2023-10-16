@@ -13,10 +13,8 @@ export const useAuthStore = defineStore({
         const response = await $fetch('/api/users/login', {
           method: 'POST',
           body: JSON.stringify(data),
-          headers: { 'Content-Type': 'application/json' },
         })
         const user: UserInfo = response
-
         this.setCredentials(user)
 
         return user
@@ -29,7 +27,6 @@ export const useAuthStore = defineStore({
         const response = await $fetch('/api/users/register', {
           method: 'POST',
           body: JSON.stringify(data),
-          headers: { 'Content-Type': 'application/json' },
         })
         const user: UserInfo = response
         this.setCredentials(user)
@@ -54,7 +51,6 @@ export const useAuthStore = defineStore({
         const response = await $fetch('/api/users/profile', {
           method: 'PUT',
           body: JSON.stringify(data),
-          headers: { 'Content-Type': 'application/json' },
         })
         const user = response
         this.setCredentials(user)
