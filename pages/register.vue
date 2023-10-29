@@ -98,7 +98,7 @@ isLoggedIn()
 
       <button
         type="submit"
-        class="btn btn-primary mt-2"
+        class="btn btn-primary mt-2 w-100"
         :disabled="!name || !email || !password || !confirmPassword"
       >
         Register
