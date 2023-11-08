@@ -23,7 +23,7 @@ function refetch(pageNumber: number) {
 }
 
 watchEffect(() => {
-  if (error.value.statusCode === 403) {
+  if (error.value && error.value.statusCode === 403) {
     authStore.logout()
   }
   if (!authStore.userInfo || !authStore.userInfo.isAdmin) {

@@ -16,7 +16,7 @@ defineProps({
           provider="cloudinary"
           :src="product.image"
           class="card-img-top"
-          :alt="`An image of ${product.image}`"
+          :alt="`An image of ${product.name}`"
         />
       </div>
     </NuxtLink>

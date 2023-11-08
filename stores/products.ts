@@ -40,6 +40,16 @@ export const useProductStore = defineStore({
         return error
       }
     },
+    async searchProducts(keyword: string) {
+      try {
+        const { data } = await useFetch(`/api/products/search/${keyword}`)
+        if (data.value) {
+          this.products = data.value as Product[]
+        }
+      } catch (error) {
+        return error
+      }
+    },
     async createReview(productId: string, data: Review) {
       try {
         await $fetch(`/api/products/product/${productId}/reviews`, {
