@@ -2,7 +2,7 @@
 const keyword = ref('')
 
 function handleSearch() {
-  if (keyword) {
+  if (keyword.value.trim()) {
     navigateTo(`/search/${keyword.value.trim()}`)
     keyword.value = ''
   } else {
@@ -28,5 +28,3 @@ function handleSearch() {
     </button>
   </form>
 </template>
-
-<style scoped></style>
