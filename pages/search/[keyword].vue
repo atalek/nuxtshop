@@ -18,8 +18,6 @@ try {
   isLoading.value = false
 }
 const { products } = storeToRefs(productStore)
-
-console.log(products)
 </script>
 
 <template>

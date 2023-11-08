@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Analytics } from '@vercel/analytics/react'
+
 import { useCartStore } from '~/stores/cart'
 import { useAuthStore } from '~/stores/auth'
 
@@ -35,6 +37,7 @@ useHead({
     <NuxtLayout name="default">
       <div>
         <NuxtPage />
+        <Analytics />
       </div>
     </NuxtLayout>
   </div>
