@@ -14,7 +14,13 @@ export default defineNuxtConfig({
 
   css: ['~/assets/styles/bootstrap.custom.css', '~/assets/styles/index.css'],
 
-  modules: ['nuxt-icon', 'nuxt-mongoose', '@pinia/nuxt', '@nuxt/image'],
+  modules: [
+    'nuxt-icon',
+    'nuxt-mongoose',
+    '@pinia/nuxt',
+    '@nuxt/image',
+    'nuxt-vercel-analytics',
+  ],
 
   nitro: {
     compressPublicAssets: true,
