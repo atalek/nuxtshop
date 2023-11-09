@@ -1,6 +1,6 @@
 # NuxtShop eCommerce Platform
 
-Inspired by Brad Traversy's ProShop v2 course, rebuilt fully with Nuxt 3.
+Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
 
 ## Features
 
