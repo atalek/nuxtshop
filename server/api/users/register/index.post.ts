@@ -26,7 +26,6 @@ export default defineEventHandler(async event => {
   }
 
   const user = await User.create({ name, email, password })
-  event.context.user = user
 
   if (user) {
     generateToken(event, user._id)

@@ -10,7 +10,6 @@ export default defineEventHandler(async event => {
 
   try {
     const user = await User.findOne({ email: email })
-    event.context.user = user
 
     if (user && (await user.matchPassword(password))) {
       generateToken(event, user._id)
