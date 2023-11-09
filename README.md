@@ -1,75 +1,39 @@
-# Nuxt 3 Minimal Starter
+# NuxtShop eCommerce Platform (v3)
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Inspired by Brad Traversy's ProShop v2 course, rebuilt fully with Nuxt 3.
 
-## Setup
+## Features
 
-Make sure to install the dependencies:
+- Full featured shopping cart
+- Product reviews and ratings
+- Top products carousel
+- Product pagination
+- Product search feature
+- User profile with orders
+- Admin product management
+- Admin user management
+- Admin Order details page
+- Mark orders as delivered option
+- Checkout process (shipping, payment method, etc.)
+- Stripe payment integration
 
-```bash
-# npm
-npm install
+## Built with
 
-# pnpm
-pnpm install
+- Nuxt 3
+- MongoDB
+- Pinia
+- Bootstrap 5
+- Cloudinary
+- Stripe
+- BCrypt
+- JSON web token
 
-# yarn
-yarn install
+## Live Version
 
-# bun
-bun install
-```
+[https://nuxtshop-yep.vercel.app/](https://nuxtshop-yep.vercel.app/)
 
-## Development Server
+## Author
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Github @[Amphei](https://github.com/Amphei) <br>
+Linkedin: @[Aleksandar Atanasovski](https://www.linkedin.com/in/aleksandar-atanasovski-16b123263/) <br>
+[Portfolio] (soon...)
