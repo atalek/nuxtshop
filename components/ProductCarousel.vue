@@ -37,7 +37,7 @@ const products = computed(() => productStore.topProducts)
             class="d-block caroimg img-fluid"
             :alt="product.name"
           />
-          <div class="carousel-caption d-none d-md-block">
+          <div class="carousel-caption">
             <h2 class="text-white">{{ product.name }}</h2>
             <p class="text-white">{{ `$${product.price}` }}</p>
           </div>
