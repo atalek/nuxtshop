@@ -13,11 +13,11 @@ if (process.client) {
 useSeoMeta({
   ogTitle: 'NuxtShop',
   ogDescription: 'eCommerce website example',
-  ogImage: 'https://nuxt.com/assets/design-kit/logo/icon-green.svg',
+  ogImage: 'https://seeklogo.com/images/N/nuxt-logo-1CCC5F38FD-seeklogo.com.png',
   ogUrl: 'https://nuxtshop-yep.vercel.app',
   twitterTitle: 'NuxtShop',
   twitterDescription: 'eCommerce website example built with Nuxt3',
-  twitterImage: 'https://nuxt.com/assets/design-kit/logo/icon-green.svg',
+  twitterImage: 'https://seeklogo.com/images/N/nuxt-logo-1CCC5F38FD-seeklogo.com.png',
   twitterCard: 'summary',
 })
 
