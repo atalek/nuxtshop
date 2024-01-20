@@ -49,6 +49,7 @@ useHead({
 
 <template>
   <div>
+    <NuxtLoadingIndicator />
     <NuxtLayout name="default">
       <div>
         <NuxtPage />
