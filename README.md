@@ -68,7 +68,6 @@ Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
    # Stripe
    STRIPE_PUBLIC_KEY=your_stripe_public_key
    STRIPE_SECRET_KEY=your_stripe_secret_key
-   STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 
    # NODE_ENV
    NODE_ENV=development
