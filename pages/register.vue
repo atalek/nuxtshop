@@ -25,7 +25,7 @@ async function submitHandler() {
     }
     try {
       const res = await authStore.register(data)
-      if (res && res._id) {
+      if (res) {
         navigateTo(redirect as RouteLocationRaw)
       }
     } catch (error: any) {
@@ -35,8 +35,8 @@ async function submitHandler() {
 }
 
 const isLoggedIn = () => {
-  if (authStore.userInfo && Object.keys(authStore.userInfo).length > 0) {
-    navigateTo(redirect as RouteLocationRaw)
+  if (authStore.userInfo !== undefined) {
+    return navigateTo(redirect as RouteLocationRaw)
   }
 }
 
@@ -44,76 +44,71 @@ isLoggedIn()
 </script>
 
 <template>
-  <Title>{{ 'Register' }}</Title>
-  <FormContainer>
-    <h1>Register</h1>
-    <form @submit.prevent="submitHandler">
-      <div class="form-group my-2">
-        <label for="name" class="form-label">Name:</label>
-        <input
-          type="name"
-          placeholder="Enter Name"
-          v-model="name"
-          name="name"
-          id="name"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group my-2">
-        <label for="email" class="form-label">Email Address:</label>
-        <input
-          type="email"
-          placeholder="Enter email"
-          v-model="email"
-          name="email"
-          id="email"
-          class="form-control"
-        />
-      </div>
+  <div>
+    <Title>{{ 'Register' }}</Title>
+    <FormContainer>
+      <h1>Register</h1>
+      <form @submit.prevent="submitHandler">
+        <div class="form-group my-2">
+          <label for="name" class="form-label">Name:</label>
+          <input
+            type="name"
+            placeholder="Enter Name"
+            v-model="name"
+            name="name"
+            id="name"
+            class="form-control" />
+        </div>
+        <div class="form-group my-2">
+          <label for="email" class="form-label">Email Address:</label>
+          <input
+            type="email"
+            placeholder="Enter email"
+            v-model="email"
+            name="email"
+            id="email"
+            class="form-control" />
+        </div>
 
-      <div class="form-group my-2">
-        <label for="password" class="form-label">Password:</label>
-        <input
-          type="password"
-          placeholder="Enter password"
-          v-model="password"
-          name="password"
-          id="password"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group my-2">
-        <label for="confirm-password" class="form-label"
-          >Confirm Password:</label
-        >
-        <input
-          type="password"
-          placeholder="Confirm password"
-          v-model="confirmPassword"
-          name="confirm-password"
-          id="confirm-password"
-          class="form-control"
-        />
-      </div>
+        <div class="form-group my-2">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="password"
+            placeholder="Enter password"
+            v-model="password"
+            name="password"
+            id="password"
+            class="form-control" />
+        </div>
+        <div class="form-group my-2">
+          <label for="confirm-password" class="form-label"
+            >Confirm Password:</label
+          >
+          <input
+            type="password"
+            placeholder="Confirm password"
+            v-model="confirmPassword"
+            name="confirm-password"
+            id="confirm-password"
+            class="form-control" />
+        </div>
 
-      <button
-        type="submit"
-        class="btn btn-primary mt-2 w-100"
-        :disabled="!name || !email || !password || !confirmPassword"
-      >
-        Register
-      </button>
-    </form>
+        <button
+          type="submit"
+          class="btn btn-primary mt-2 w-100"
+          :disabled="!name || !email || !password || !confirmPassword">
+          Register
+        </button>
+      </form>
 
-    <div class="row py-3">
-      <div class="col">
-        Already have an account ?
-        <NuxtLink :to="redirect ? `/login?redirect=${redirect}` : '/login'"
-          >Sign In</NuxtLink
-        >
+      <div class="row py-3">
+        <div class="col">
+          Already have an account ?
+          <NuxtLink :to="redirect ? `/login?redirect=${redirect}` : '/login'"
+            >Sign In</NuxtLink
+          >
+        </div>
       </div>
-    </div>
-  </FormContainer>
+    </FormContainer>
+  </div>
 </template>
-
-<style scoped></style>

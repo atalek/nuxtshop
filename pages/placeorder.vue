@@ -8,7 +8,7 @@ import { ShippingAddress } from '~/types'
 const cartStore = useCartStore()
 const orderStore = useOrderStore()
 const shippingAddress = computed(
-  () => cartStore.shippingAddress as ShippingAddress
+  () => cartStore.shippingAddress as ShippingAddress,
 )
 
 async function placeOrderHandler() {
@@ -31,16 +31,14 @@ async function placeOrderHandler() {
 </script>
 
 <template>
-  <Title>{{ 'Place Order' }}</Title>
-
   <div class="row">
+    <Title>{{ 'Place Order' }}</Title>
     <CheckoutSteps
       class="mt-4"
       :step1="true"
       :step2="true"
       :step3="true"
-      :step4="true"
-    />
+      :step4="true" />
     <div class="col-md-8">
       <div class="list-group list-group-flush">
         <div class="list-group-item">
@@ -63,24 +61,21 @@ async function placeOrderHandler() {
         <div
           class="alert alert-danger"
           role="alert"
-          v-if="cartStore.items.length === 0"
-        >
+          v-if="cartStore.items.length === 0">
           Your cart is empty
         </div>
 
         <div
           class="list-group-item"
           v-for="(item, index) in cartStore.items"
-          :key="index"
-        >
+          :key="index">
           <div class="row">
             <div class="col-md-2">
               <NuxtImg
                 provider="cloudinary"
                 :src="item.product.image"
                 :alt="item.product.name"
-                class="img-fluid rounded"
-              />
+                class="img-fluid rounded" />
             </div>
             <div class="col">
               <NuxtLink :to="`/product/${item.product}`">{{
@@ -136,8 +131,7 @@ async function placeOrderHandler() {
             <button
               class="btn btn-primary btn-block w-100 w-sm-100"
               @click="placeOrderHandler"
-              :disabled="cartStore.totalCount === 0"
-            >
+              :disabled="cartStore.totalCount === 0">
               Place Order
             </button>
           </div>

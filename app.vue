@@ -5,25 +5,42 @@ import { useAuthStore } from '~/stores/auth'
 const cartStore = useCartStore()
 const authStore = useAuthStore()
 
+const userData = useCookie('auth')
+
+authStore.nuxtClientInit(userData.value)
+
 if (process.client) {
   cartStore.nuxtClientInit()
-  authStore.nuxtClientInit()
 }
 
 useSeoMeta({
-  ogTitle: 'NuxtShop',
-  ogDescription: 'eCommerce website example',
-  ogImage: 'https://seeklogo.com/images/N/nuxt-logo-1CCC5F38FD-seeklogo.com.png',
+  title: 'NuxtShop',
+  description:
+    'Shop unique finds, explore trending styles, and express your individuality with NuxtShop. ✨',
+  image:
+    'https://res.cloudinary.com/dkofkuquf/image/upload/v1705789464/nuxtshop/qoaeksaivb518wpikvin.webp',
+  url: 'https://nuxtshop-yep.vercel.app',
+
+  ogTitle: 'NuxtShop - Shop Your Style, Effortlessly  ✨',
+  ogDescription:
+    'Discover a curated collection of unique products that reflect your personality at NuxtShop. ✨',
+  ogImage:
+    'https://res.cloudinary.com/dkofkuquf/image/upload/v1705789464/nuxtshop/qoaeksaivb518wpikvin.webp',
   ogUrl: 'https://nuxtshop-yep.vercel.app',
-  twitterTitle: 'NuxtShop',
-  twitterDescription: 'eCommerce website example built with Nuxt3',
-  twitterImage: 'https://seeklogo.com/images/N/nuxt-logo-1CCC5F38FD-seeklogo.com.png',
-  twitterCard: 'summary',
+
+  twitterTitle:
+    'Express Your Individuality with NuxtShop ✨ #ecommerce #fashion #shopping',
+  twitterDescription:
+    'Shop a curated collection of unique finds that celebrate your style. Explore now! ✨',
+  twitterImage:
+    'https://res.cloudinary.com/dkofkuquf/image/upload/v1705789464/nuxtshop/qoaeksaivb518wpikvin.webp',
+  twitterCard: 'summary_large_image',
 })
 
 useHead({
   htmlAttrs: { lang: 'en' },
   meta: [{ name: 'description', content: 'eCommerce website example' }],
+  link: [{ rel: 'icon', href: '/favicon.ico' }],
   titleTemplate: titleChunk => {
     return titleChunk ? `${titleChunk} | NuxtShop` : 'NuxtShop'
   },

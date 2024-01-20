@@ -13,6 +13,12 @@ export default defineEventHandler(async event => {
 
     if (user && (await user.matchPassword(password))) {
       generateToken(event, user._id)
+      const userForCookie = {
+        ...user.toObject(),
+        password: undefined,
+      }
+
+      setCookie(event, 'auth', JSON.stringify(userForCookie))
 
       return {
         _id: user._id,

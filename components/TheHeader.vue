@@ -5,11 +5,13 @@ import { toast } from 'vue3-toastify'
 
 const cartStore = useCartStore()
 const authStore = useAuthStore()
+const userData = useCookie('auth')
 
 async function logoutHandler() {
   try {
     authStore.logout()
     cartStore.clear()
+    userData.value = undefined
   } catch (error: any) {
     toast.error(error.data.message)
   }
@@ -22,7 +24,7 @@ const isLinkActive = (to: string) => {
 }
 
 const isAdminActive = computed(() => {
-  return route.path.startsWith('/admin')
+  return route.path.includes('/admin')
 })
 </script>
 
@@ -30,12 +32,11 @@ const isAdminActive = computed(() => {
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <div class="container">
-        <NuxtLink class="navbar-brand" href="/">
+        <NuxtLink class="navbar-brand" to="/">
           <img
             src="~/assets/nuxt.png"
             alt="nuxtshop logo"
-            style="width: 40px; height: 40px"
-          />
+            style="width: 40px; height: 40px" />
           <span style="color: rgb(67, 238, 67); margin-left: 5px">Nuxt</span
           >Shop
         </NuxtLink>
@@ -45,8 +46,7 @@ const isAdminActive = computed(() => {
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -59,8 +59,7 @@ const isAdminActive = computed(() => {
                 class="nav-link"
                 :class="{ active: isLinkActive('/cart') }"
                 aria-current="page"
-                to="/cart"
-              >
+                to="/cart">
                 <Icon name="fa6-solid:cart-shopping" />
                 Cart
                 <span v-show="cartStore.totalCount > 0" class="cart-count">{{
@@ -71,24 +70,19 @@ const isAdminActive = computed(() => {
 
             <li
               class="nav-item dropdown"
-              v-if="
-                authStore.userInfo && Object.keys(authStore.userInfo).length > 0
-              "
-            >
+              v-if="authStore.userInfo !== undefined">
               <div class="dropdown">
                 <div
                   class="nav-link dropdown-toggle"
                   id="user-profile-navbarDropdownMenuLink"
                   data-bs-toggle="dropdown"
                   style="cursor: pointer"
-                  :class="{ active: isLinkActive('/profile') }"
-                >
+                  :class="{ active: isLinkActive('/profile') }">
                   {{ authStore.userInfo.name }}
                 </div>
                 <ul
                   class="dropdown-menu"
-                  aria-labelledby="user-profile-navbarDropdownMenuLink"
-                >
+                  aria-labelledby="user-profile-navbarDropdownMenuLink">
                   <li>
                     <NuxtLink class="dropdown-item" to="/profile"
                       >Profile</NuxtLink
@@ -116,21 +110,20 @@ const isAdminActive = computed(() => {
             </li>
             <div
               class="dropdown"
-              v-show="authStore.userInfo && authStore.userInfo.isAdmin"
-            >
+              v-if="
+                authStore.userInfo !== undefined && authStore.userInfo.isAdmin
+              ">
               <div
                 :class="{ active: isAdminActive }"
                 class="nav-link dropdown-toggle"
                 id="admin-pannel-navbarDropdownMenuLink"
                 data-bs-toggle="dropdown"
-                style="cursor: pointer"
-              >
+                style="cursor: pointer">
                 Admin
               </div>
               <ul
                 class="dropdown-menu"
-                aria-labelledby="admin-pannel-navbarDropdownMenuLink"
-              >
+                aria-labelledby="admin-panel-navbarDropdownMenuLink">
                 <li>
                   <NuxtLink class="dropdown-item" to="/admin/productlist"
                     >Products</NuxtLink

@@ -11,14 +11,13 @@ watch(
   () => {
     cartStore.saveCartToLocalStorage()
   },
-  { deep: true }
+  { deep: true },
 )
 </script>
 
 <template>
-  <Title>{{ 'Cart' }}</Title>
-
   <div class="row">
+    <Title>{{ 'Cart' }}</Title>
     <div class="col-md-8">
       <h1 class="my-2">Shopping Cart</h1>
       <div v-if="cartItems.length === 0">
@@ -30,16 +29,14 @@ watch(
         <div
           v-for="item in cartItems"
           :key="item.product._id"
-          class="list-group-item d-flex justify-content-between"
-        >
+          class="list-group-item d-flex justify-content-between">
           <div class="row align-items-center w-100">
             <div class="col-md-2 my-1">
               <NuxtImg
                 provider="cloudinary"
                 :src="item.product?.image"
                 :alt="`image of ${item.product.name}`"
-                class="img-fluid rounded"
-              />
+                class="img-fluid rounded" />
             </div>
             <div class="col-md-3">
               <NuxtLink :to="`/product/${item.product._id}`">{{
@@ -52,8 +49,7 @@ watch(
                 <option
                   v-for="x in item.product.countInStock"
                   :key="x"
-                  :value="x"
-                >
+                  :value="x">
                   {{ x }}
                 </option>
               </select>
@@ -61,8 +57,7 @@ watch(
             <div class="col-md-2">
               <button
                 class="btn btn-danger w-100"
-                @click="cartStore.removeItem(item.product)"
-              >
+                @click="cartStore.removeItem(item.product)">
                 <Icon name="fa6-solid:trash" style="color: white" />
               </button>
             </div>
@@ -84,8 +79,7 @@ watch(
             <button
               class="btn btn-primary w-100"
               :disabled="cartStore.totalCount === 0"
-              @click="cartStore.checkout"
-            >
+              @click="cartStore.checkout">
               Proceed to Checkout
             </button>
           </div>

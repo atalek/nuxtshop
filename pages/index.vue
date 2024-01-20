@@ -9,7 +9,7 @@ const { data } = await useAsyncData(
         page: page.value,
       },
     }),
-  { watch: [page] }
+  { watch: [page] },
 )
 
 function refetch(pageNumber: number) {
@@ -18,17 +18,18 @@ function refetch(pageNumber: number) {
 </script>
 
 <template>
-  <ProductCarousel />
+  <div>
+    <ProductCarousel />
 
-  <h1>Latest Products</h1>
-  <div class="row py-3">
-    <div
-      class="col-sm-12 col-md-6 col-lg-4 col-xl-3"
-      v-for="product in data!.products"
-      :key="product._id"
-    >
-      <Product :product="product" />
+    <h1>Latest Products</h1>
+    <div class="row py-3">
+      <div
+        class="col-sm-12 col-md-6 col-lg-4 col-xl-3"
+        v-for="product in data!.products"
+        :key="product._id">
+        <Product :product="product" />
+      </div>
+      <Paginate @change="refetch" :pages="data!.pages" :page="page" />
     </div>
-    <Paginate @change="refetch" :pages="data!.pages" :page="page" />
   </div>
 </template>

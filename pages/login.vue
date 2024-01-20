@@ -19,17 +19,17 @@ async function submitHandler() {
   }
   try {
     const res = await authStore.login(data)
-    if (res && res._id) {
-      navigateTo(redirect as RouteLocationRaw)
+    if (res) {
+      return navigateTo(redirect as RouteLocationRaw)
     }
   } catch (error: any) {
-    toast.error('Invalid username or passsword')
+    toast.error('Invalid username or password')
   }
 }
 
 const isLoggedIn = () => {
-  if (authStore.userInfo && Object.keys(authStore.userInfo).length > 0) {
-    navigateTo(redirect as RouteLocationRaw)
+  if (authStore.userInfo !== undefined) {
+    return navigateTo(redirect as RouteLocationRaw)
   }
 }
 
@@ -37,50 +37,46 @@ isLoggedIn()
 </script>
 
 <template>
-  <Title>{{ 'Log in' }}</Title>
+  <div>
+    <Title>{{ 'Log in' }}</Title>
+    <FormContainer>
+      <h1>Sign in</h1>
+      <form @submit.prevent="submitHandler">
+        <div class="form-group my-2">
+          <label for="email" class="form-label">Email Address:</label>
+          <input
+            placeholder="Enter email"
+            v-model="email"
+            type="email"
+            name="email"
+            id="email"
+            class="form-control" />
+        </div>
 
-  <FormContainer>
-    <h1>Sign in</h1>
-    <form @submit.prevent="submitHandler">
-      <div class="form-group my-2">
-        <label for="email" class="form-label">Email Address:</label>
-        <input
-          placeholder="Enter email"
-          v-model="email"
-          type="email"
-          name="email"
-          id="email"
-          class="form-control"
-        />
+        <div class="form-group my-2">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="password"
+            placeholder="Enter password"
+            v-model="password"
+            name="password"
+            id="password"
+            class="form-control" />
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary mt-2 w-100"
+          :disabled="!email || !password">
+          Sign In
+        </button>
+      </form>
+
+      <div class="row py-3">
+        <div class="col">
+          New Customer ? <NuxtLink to="/register">Register</NuxtLink>
+        </div>
       </div>
-
-      <div class="form-group my-2">
-        <label for="password" class="form-label">Password:</label>
-        <input
-          type="password"
-          placeholder="Enter password"
-          v-model="password"
-          name="password"
-          id="password"
-          class="form-control"
-        />
-      </div>
-
-      <button
-        type="submit"
-        class="btn btn-primary mt-2 w-100"
-        :disabled="!email || !password"
-      >
-        Sign In
-      </button>
-    </form>
-
-    <div class="row py-3">
-      <div class="col">
-        New Customer ? <NuxtLink to="/register">Register</NuxtLink>
-      </div>
-    </div>
-  </FormContainer>
+    </FormContainer>
+  </div>
 </template>
-
-<style scoped></style>

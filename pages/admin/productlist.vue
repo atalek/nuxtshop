@@ -5,9 +5,13 @@ import formatPrice from '~/utils/formatter'
 
 const authStore = useAuthStore()
 
+definePageMeta({
+  middleware: 'admin',
+})
+
 const page = ref(1)
 
-const { data, error, refresh } = await useAsyncData(
+const { data, refresh } = await useAsyncData(
   'products',
 
   () =>
@@ -16,7 +20,7 @@ const { data, error, refresh } = await useAsyncData(
         page: page.value,
       },
     }),
-  { watch: [page] }
+  { watch: [page] },
 )
 
 function refetch(pageNumber: number) {
@@ -24,7 +28,7 @@ function refetch(pageNumber: number) {
 }
 
 async function createProduct() {
-  if (authStore.userInfo && authStore.userInfo.isAdmin) {
+  if (authStore.userInfo !== undefined && authStore.userInfo.isAdmin) {
     if (window.confirm('Are you sure you want to create a new product?')) {
       try {
         await $fetch('/api/products/create', { method: 'POST' })
@@ -50,72 +54,62 @@ async function deleteHandler(productId: string) {
     }
   }
 }
-
-watchEffect(() => {
-  if (error.value && error.value.statusCode === 403) {
-    authStore.logout()
-  }
-  if (!authStore.userInfo || !authStore.userInfo.isAdmin) {
-    navigateTo('/login')
-  }
-})
 </script>
 
 <template>
-  <Title>{{ 'Products | Admin' }}</Title>
+  <div>
+    <Title>{{ 'Products | Admin' }}</Title>
 
-  <div class="row align-items-center">
-    <div class="col">
-      <h1>Products</h1>
+    <div class="row align-items-center">
+      <div class="col">
+        <h1>Products</h1>
+      </div>
+      <div class="col text-end">
+        <button class="btn btn-primary btn-sm m-3" @click="createProduct">
+          <Icon name="ri:edit-box-line" /> Create product
+        </button>
+      </div>
     </div>
-    <div class="col text-end">
-      <button class="btn btn-primary btn-sm m-3" @click="createProduct">
-        <Icon name="ri:edit-box-line" /> Create product
-      </button>
-    </div>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-striped responsive">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">NAME</th>
-          <th scope="col">PRICE</th>
-          <th scope="col">STOCK</th>
-          <th scope="col">CATEGORY</th>
-          <th scope="col">BRAND</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="product in data!.products" :key="product._id">
-          <td>{{ product._id }}</td>
-          <td>{{ product.name }}</td>
-          <td>{{ formatPrice(product.price) }}</td>
-          <td>{{ product.countInStock }}</td>
-          <td>{{ product.category }}</td>
-          <td>{{ product.brand }}</td>
-          <td>
-            <NuxtLink :to="`/admin/product/${product._id}`">
-              <button class="btn btn-light btn-sm mx-2">
-                <Icon name="fa6-solid:pen-to-square" />
+    <div class="table-responsive">
+      <table class="table table-striped responsive">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">PRICE</th>
+            <th scope="col">STOCK</th>
+            <th scope="col">CATEGORY</th>
+            <th scope="col">BRAND</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="product in data!.products" :key="product._id">
+            <td>{{ product._id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ formatPrice(product.price) }}</td>
+            <td>{{ product.countInStock }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.brand }}</td>
+            <td>
+              <NuxtLink :to="`/admin/product/${product._id}`">
+                <button class="btn btn-light btn-sm mx-2">
+                  <Icon name="fa6-solid:pen-to-square" />
+                </button>
+              </NuxtLink>
+            </td>
+            <td>
+              <button
+                class="btn btn-danger btn-sm mx-2"
+                @click="deleteHandler(product._id)">
+                <Icon style="color: white" name="bi:trash-fill" />
               </button>
-            </NuxtLink>
-          </td>
-          <td>
-            <button
-              class="btn btn-danger btn-sm mx-2"
-              @click="deleteHandler(product._id)"
-            >
-              <Icon style="color: white" name="bi:trash-fill" />
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <Paginate @change="refetch" :pages="data!.pages" :page="page" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <Paginate @change="refetch" :pages="data!.pages" :page="page" />
+    </div>
   </div>
 </template>
-
-<style scoped></style>

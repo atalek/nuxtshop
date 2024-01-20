@@ -45,137 +45,130 @@ async function createReview() {
 </script>
 
 <template>
-  <Title>{{ product.name }}</Title>
-
   <div>
-    <NuxtLink to="/" class="btn btn-light mb-3">Go Back</NuxtLink>
+    <Title>{{ product.name }}</Title>
 
-    <div class="row">
-      <div class="col-md-5">
-        <NuxtImg
-          provider="cloudinary"
-          :src="product?.image"
-          :alt="`image of ${product.name}`"
-          class="img-fluid rounded w-100"
-        />
-      </div>
-      <div class="col-md-4">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item single-product">
-            <h3>
-              {{ product?.name }}
-            </h3>
-          </li>
+    <div>
+      <NuxtLink to="/" class="btn btn-light mb-3">Go Back</NuxtLink>
 
-          <li class="list-group-item">
-            <Rating
-              :value="product?.rating"
-              :text="`${product?.numReviews} reviews`"
-            />
-          </li>
-          <li class="list-group-item">Price: ${{ product.price }}</li>
-          <li class="list-group-item">
-            Description: {{ product.description }}
-          </li>
-        </ul>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
+      <div class="row">
+        <div class="col-md-5">
+          <NuxtImg
+            provider="cloudinary"
+            :src="product?.image"
+            :alt="`image of ${product.name}`"
+            class="img-fluid rounded w-100" />
+        </div>
+        <div class="col-md-4">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col">Price:</div>
-                <div class="col">
-                  <strong>${{ product.price }}</strong>
-                </div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col">Status:</div>
-                <div class="col">
-                  <strong>{{
-                    product.countInStock! > 0 ? 'In Stock' : 'Out of stock'
-                  }}</strong>
-                </div>
-              </div>
+            <li class="list-group-item single-product">
+              <h3>
+                {{ product?.name }}
+              </h3>
             </li>
 
             <li class="list-group-item">
-              <button
-                class="btn btn-block btn-primary w-100"
-                :disabled="product.countInStock === 0"
-                @click="cartStore.addItem(product!)"
-              >
-                Add to cart
-              </button>
+              <Rating
+                :value="product?.rating"
+                :text="`${product?.numReviews} reviews`" />
+            </li>
+            <li class="list-group-item">Price: ${{ product.price }}</li>
+            <li class="list-group-item">
+              Description: {{ product.description }}
             </li>
           </ul>
         </div>
-      </div>
-    </div>
-    <div class="row review">
-      <div class="col-md-6">
-        <h2>Reviews</h2>
-        <p
-          class="my-4 alert alert-primary"
-          role="alert"
-          v-show="product?.reviews?.length === 0"
-        >
-          No Reviews
-        </p>
-        <div class="list-group list-group flush">
-          <div
-            class="list-group-item"
-            v-for="review in product.reviews"
-            :key="review._id"
-          >
-            <strong>{{ review.name }}</strong>
-            <Rating :value="review.rating" />
-            <p>{{ review.createdAt?.substring(0, 10) }}</p>
-            <p>{{ review.comment }}</p>
+
+        <div class="col-md-3">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col">Price:</div>
+                  <div class="col">
+                    <strong>${{ product.price }}</strong>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col">Status:</div>
+                  <div class="col">
+                    <strong>{{
+                      product.countInStock! > 0 ? 'In Stock' : 'Out of stock'
+                    }}</strong>
+                  </div>
+                </div>
+              </li>
+
+              <li class="list-group-item">
+                <button
+                  class="btn btn-block btn-primary w-100"
+                  :disabled="product.countInStock === 0"
+                  @click="cartStore.addItem(product!)">
+                  Add to cart
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div
-          class="list-group-item"
-          v-if="Object.keys(authStore.userInfo).length > 0"
-        >
-          <h2>Write a review</h2>
-          <form @submit.prevent="createReview">
-            <div class="form-group my-2" id="rating">
-              <label for="rating" class="form-label">Pick a rating</label>
-              <select class="form-control" v-model="rating">
-                <option>1 - Poor</option>
-                <option>2 - Fair</option>
-                <option>3 - Good</option>
-                <option>4 - Very Good</option>
-                <option>5 - Excellent</option>
-              </select>
+      <div class="row review">
+        <div class="col-md-6">
+          <h2>Reviews</h2>
+          <p
+            class="my-4 alert alert-primary"
+            role="alert"
+            v-show="product?.reviews?.length === 0">
+            No Reviews
+          </p>
+          <div class="list-group list-group flush">
+            <div
+              class="list-group-item"
+              v-for="review in product.reviews"
+              :key="review._id?.toString()">
+              <strong>{{ review.name }}</strong>
+              <Rating :value="review.rating" />
+              <p>{{ review.createdAt?.substring(0, 10) }}</p>
+              <p>{{ review.comment }}</p>
             </div>
-            <div class="form-group my-2">
-              <label for="comment" class="form-label">Leave a comment</label>
-              <textarea
-                placeholder="Enter comment"
-                v-model="comment"
-                name="comment"
-                id="comment"
-                class="form-control"
-                rows="3"
-              >
-              </textarea>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
-          </form>
+          </div>
         </div>
-        <div v-else>
-          Please <NuxtLink to="/login">sign in</NuxtLink> to write a review
+        <div class="col-md-6">
+          <div class="list-group-item" v-if="authStore.userInfo !== undefined">
+            <h2>Write a review</h2>
+            <form @submit.prevent="createReview">
+              <div class="form-group my-2" id="rating">
+                <label for="rating" class="form-label">Pick a rating</label>
+                <select class="form-control" v-model="rating">
+                  <option>1 - Poor</option>
+                  <option>2 - Fair</option>
+                  <option>3 - Good</option>
+                  <option>4 - Very Good</option>
+                  <option>5 - Excellent</option>
+                </select>
+              </div>
+              <div class="form-group my-2">
+                <label for="comment" class="form-label">Leave a comment</label>
+                <textarea
+                  placeholder="Enter comment"
+                  v-model="comment"
+                  name="comment"
+                  id="comment"
+                  class="form-control"
+                  rows="3">
+                </textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Submit
+              </button>
+            </form>
+          </div>
+          <div v-else>
+            Please <NuxtLink to="/login">sign in</NuxtLink> to write a review
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped></style>

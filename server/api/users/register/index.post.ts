@@ -29,6 +29,13 @@ export default defineEventHandler(async event => {
 
   if (user) {
     generateToken(event, user._id)
+
+    const userForCookie = {
+      ...user.toObject(),
+      password: undefined,
+    }
+
+    setCookie(event, 'auth', JSON.stringify(userForCookie))
     return {
       _id: user._id,
       name: user.name,

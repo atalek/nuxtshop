@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import { useCartStore } from '~/stores/cart'
+definePageMeta({
+  middleware: 'unauthenticated',
+})
 
 const cartStore = useCartStore()
 const paymentMethod = ref('PayPal')
@@ -17,9 +20,8 @@ watchEffect(() => {
 </script>
 
 <template>
-  <Title>{{ 'Payment' }}</Title>
-
   <FormContainer>
+    <Title>{{ 'Payment' }}</Title>
     <CheckoutSteps :step1="true" :step2="true" :step3="true" />
     <h1>Payment Method</h1>
     <form class="form-group" @submit.prevent="submitHandler">
@@ -31,8 +33,7 @@ watchEffect(() => {
             type="radio"
             name="flexRadioDefault"
             id="flexRadioDefault1"
-            checked="true"
-          />
+            checked="true" />
           <label class="form-check-label" for="flexRadioDefault1">
             PayPal or Credit Card
           </label>
