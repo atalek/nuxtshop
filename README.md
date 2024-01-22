@@ -56,7 +56,7 @@ Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
 4. **Configure environment variables.**
 
    - Create a `.env` file in the root of the project.
-   - Add the necessary environment variables for Stripe and Cloudinary.
+   - Add the necessary environment variables.
 
    ```env
    # Mongodb
@@ -69,14 +69,14 @@ Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
    STRIPE_PUBLIC_KEY=your_stripe_public_key
    STRIPE_SECRET_KEY=your_stripe_secret_key
 
-   # NODE_ENV
-   NODE_ENV=development
 
    # Cloudinary
    CLOUDINARY=your_cloudinary_base_url
    CLOUDINARY_NAME=your_cloud_name
    CLOUDINARY_FOLDER=your_cloudinary_folder
 
+   # NODE_ENV
+   NODE_ENV=development
 
    ```
 
@@ -98,4 +98,5 @@ Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
 
 Github [@Amphei](https://github.com/Amphei) <br> Linkedin:
 [@Aleksandar Atanasovski](https://www.linkedin.com/in/aleksandar-atanasovski-16b123263/)
-<br> [Portfolio] (soon...)
+<br> Portfolio:
+[https://atal-portfolio.pages.dev/](https://atal-portfolio.pages.dev/)
