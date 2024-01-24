@@ -5,10 +5,7 @@ export default defineNuxtConfig({
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
-      script: [
-        { src: 'https://upload-widget.cloudinary.com/global/all.js' },
-        { src: 'https://js.stripe.com/v3/', defer: true },
-      ],
+      script: [{ src: 'https://upload-widget.cloudinary.com/global/all.js' }],
     },
   },
 
@@ -24,15 +21,6 @@ export default defineNuxtConfig({
 
   nitro: {
     compressPublicAssets: true,
-  },
-
-  stripe: {
-    server: {
-      key: process.env.STRIPE_SECRET_KEY,
-    },
-    client: {
-      key: process.env.STRIPE_PUBLIC_KEY,
-    },
   },
 
   image: {

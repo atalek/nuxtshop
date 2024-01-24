@@ -42,6 +42,8 @@ export const useAuthStore = defineStore({
           method: 'POST',
         })
         this.clearLocalStorage()
+        // @ts-ignore
+        this.userInfo = {}
       } catch (error: any) {
         throw error
       }

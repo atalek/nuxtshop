@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "nuxtshop",
   "private": true,
   "type": "module",
   "scripts": {
@@ -20,7 +20,6 @@
   "dependencies": {
     "@nuxt/image": "^1.0.0-rc.3",
     "@pinia/nuxt": "^0.5.0",
-    "@stripe/stripe-js": "^2.1.7",
     "@types/bcryptjs": "^2.4.4",
     "@types/jsonwebtoken": "^9.0.3",
     "bcryptjs": "^2.4.3",
@@ -29,7 +28,7 @@
     "jsonwebtoken": "^9.0.2",
     "nuxt-mongoose": "^1.0.2",
     "pinia": "^2.1.7",
-    "stripe": "^13.10.0",
+    "stripe": "^14.13.0",
     "vue3-toastify": "^0.1.13"
   }
 }

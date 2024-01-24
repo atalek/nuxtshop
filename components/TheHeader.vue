@@ -11,7 +11,7 @@ async function logoutHandler() {
   try {
     authStore.logout()
     cartStore.clear()
-    userData.value = undefined
+    // userData.value = undefined
   } catch (error: any) {
     toast.error(error.data.message)
   }

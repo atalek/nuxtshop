@@ -7,14 +7,6 @@ definePageMeta({
   middleware: 'unauthenticated',
 })
 
-let stripe = null
-let elements = null
-let card = null
-let clientSecret = null
-let isProcessing = ref(false)
-let isCardValid = ref(false)
-let paymentIntent = null
-
 const authStore = useAuthStore()
 const orderStore = useOrderStore()
 
@@ -22,81 +14,7 @@ const route = useRoute()
 const orderId = route.params.id as string
 
 const { data: order, refresh } = await orderStore.fetchSingleOrder(orderId)
-const unwrappedOrder = order.value
-
-const totalAmount: number = Math.ceil(unwrappedOrder.totalPrice) * 100
-
-async function payOrder() {
-  isProcessing.value = true
-
-  if (!clientSecret) {
-    let res = await $fetch('/api/stripe/paymentintent', {
-      method: 'POST',
-      body: {
-        amount: totalAmount,
-      },
-    })
-    clientSecret = res.client_secret
-    paymentIntent = res
-  }
-
-  let result = await stripe.confirmCardPayment(clientSecret, {
-    payment_method: { card: card },
-  })
-
-  if (result.error) {
-    toast.error(result.error.data.message)
-  } else {
-    await orderStore.payOrder(orderId, paymentIntent)
-
-    toast.success('Order paid successfully!')
-    refresh()
-  }
-  isProcessing.value = false
-}
-
-async function stripeInit() {
-  const config = useRuntimeConfig().public
-
-  stripe = Stripe(config.stripePublic)
-
-  elements = stripe.elements()
-  var style = {
-    base: {
-      fontSize: '18px',
-    },
-    invalid: {
-      fontFamily: 'Arial, sans-serif',
-      color: '#EE4B2B',
-      iconColor: '#EE4B2B',
-    },
-  }
-
-  elements = stripe.elements()
-  var style = {
-    base: {
-      fontSize: '16px',
-    },
-    invalid: {
-      fontFamily: 'Arial, sans-serif',
-      color: '#EE4B2B',
-      iconColor: '#EE4B2B',
-    },
-  }
-  card = elements.create('card', {
-    hidePostalCode: true,
-    style: style,
-  })
-
-  card.mount('#card-element')
-  card.on('change', function (event) {
-    isCardValid.value = event.complete
-  })
-
-  isProcessing.value = false
-}
-
-onMounted(() => stripeInit())
+const isLoading = ref(false)
 
 async function deliverOrder() {
   if (authStore.userInfo.isAdmin) {
@@ -106,6 +24,37 @@ async function deliverOrder() {
     refresh()
   }
 }
+
+async function proceedToCheckout() {
+  try {
+    isLoading.value = true
+    const res = await $fetch('/api/stripe/checkout', {
+      method: 'POST',
+      body: order?.value,
+    })
+    if (res) {
+      return navigateTo(res, { external: true })
+    }
+  } catch (error: any) {
+    toast.error(error.data.message)
+  } finally {
+    isLoading.value = false
+  }
+}
+
+let toastShown = false
+watchEffect(() => {
+  if (!toastShown) {
+    if (route.fullPath.endsWith('success=1')) {
+      toast.success('Order paid')
+      toastShown = true
+    }
+    if (route.fullPath.endsWith('canceled=1')) {
+      toast.error('Payment failed')
+      toastShown = true
+    }
+  }
+})
 </script>
 
 <template>
@@ -218,17 +167,17 @@ async function deliverOrder() {
             </div>
             <div class="col">
               <div v-show="!order.isPaid">
-                <div id="card-element" class="my-2" />
+                <div id="card-element" />
                 <button
                   class="btn btn-primary w-100 buttonn"
-                  :disabled="isProcessing || !isCardValid"
-                  @click="payOrder">
-                  <template v-if="isProcessing">
+                  @click="proceedToCheckout">
+                  <template v-if="isLoading">
                     <Icon class="text-center" name="svg-spinners:180-ring" />
                   </template>
                   <template v-else> Pay Now </template>
                 </button>
               </div>
+
               <button
                 class="btn btn-primary w-100"
                 v-show="

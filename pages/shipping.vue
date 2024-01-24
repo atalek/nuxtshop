@@ -32,7 +32,7 @@ watchEffect(() => {
     postalCode.value &&
     country.value
   )
-  if (authStore.userInfo !== undefined) {
+  if (authStore.userInfo === undefined) {
     navigateTo('/login')
   }
 })

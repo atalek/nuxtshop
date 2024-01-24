@@ -1,4 +1,4 @@
-// Get all orders
+// Get all Users
 // Private
 
 import User from '~/server/models/userSchema'
