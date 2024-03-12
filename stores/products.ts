@@ -1,18 +1,19 @@
 import { defineStore } from 'pinia'
-import { Product, Review, ProductUpdateData } from '~/types'
+import type { ProductType, Review, ProductUpdateData } from '~/types'
 
 export const useProductStore = defineStore({
   id: 'products',
   state: () => ({
-    products: [] as Product[],
-    product: {} as Product,
-    topProducts: [] as Product[],
+    products: [] as ProductType[],
+    product: {} as ProductType,
+    topProducts: [] as ProductType[],
   }),
   actions: {
     async fetchAllProducts() {
       try {
-        const { data } = await useFetch('/api/products')
+        const { data } = await useFetch('/api/v1/products')
         if (data.value) {
+          // @ts-ignore
           this.products = await data.value
         }
       } catch (error) {
@@ -21,9 +22,9 @@ export const useProductStore = defineStore({
     },
     async fetchProduct(productId: string) {
       try {
-        const { data } = await useFetch(`/api/products/product/${productId}`)
+        const { data } = await useFetch(`/api/v1/products/product/${productId}`)
         if (data.value) {
-          this.product = data.value as Product
+          this.product = data.value as ProductType
         }
       } catch (error) {
         return error
@@ -32,9 +33,9 @@ export const useProductStore = defineStore({
 
     async fetchTopProducts() {
       try {
-        const { data } = await useFetch(`/api/products/top`)
+        const { data } = await useFetch(`/api/v1/products/top`)
         if (data.value) {
-          this.topProducts = data.value as Product[]
+          this.topProducts = data.value as ProductType[]
         }
       } catch (error) {
         return error
@@ -42,9 +43,9 @@ export const useProductStore = defineStore({
     },
     async searchProducts(keyword: string) {
       try {
-        const { data } = await useFetch(`/api/products/search/${keyword}`)
+        const { data } = await useFetch(`/api/v1/products/search/${keyword}`)
         if (data.value) {
-          this.products = data.value as Product[]
+          this.products = data.value as ProductType[]
         }
       } catch (error) {
         return error
@@ -52,9 +53,9 @@ export const useProductStore = defineStore({
     },
     async createReview(productId: string, data: Review) {
       try {
-        await $fetch(`/api/products/product/${productId}/reviews`, {
+        await $fetch(`/api/v1/products/product/${productId}/reviews`, {
           method: 'POST',
-          body: JSON.stringify(data),
+          body: data,
           headers: { 'Content-Type': 'application/json' },
         })
       } catch (error) {
@@ -64,11 +65,11 @@ export const useProductStore = defineStore({
     async updateProduct(productId: string, data: ProductUpdateData) {
       try {
         const response = await $fetch(
-          `/api/products/product/${productId}/edit`,
+          `/api/v1/products/product/${productId}/edit`,
           {
             method: 'PUT',
             body: JSON.stringify(data),
-          }
+          },
         )
 
         return response

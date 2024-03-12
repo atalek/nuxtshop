@@ -34,13 +34,24 @@ async function submitHandler() {
   }
 }
 
-const isLoggedIn = () => {
-  if (authStore.userInfo !== undefined) {
+function isLoggedIn() {
+  if (authStore.userInfo) {
     return navigateTo(redirect as RouteLocationRaw)
   }
 }
-
 isLoggedIn()
+
+async function register2() {
+  const data = {
+    name: name.value.trimEnd(),
+    email: email.value.trim(),
+    password: password.value.trim(),
+  }
+  const res = await $fetch('/api/v2/auth/register', {
+    method: 'POST',
+    body: data,
+  })
+}
 </script>
 
 <template>
@@ -48,7 +59,7 @@ isLoggedIn()
     <Title>{{ 'Register' }}</Title>
     <FormContainer>
       <h1>Register</h1>
-      <form @submit.prevent="submitHandler">
+      <form @submit.prevent="register2">
         <div class="form-group my-2">
           <label for="name" class="form-label">Name:</label>
           <input

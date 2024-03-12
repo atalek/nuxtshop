@@ -1,6 +1,6 @@
 import { Types } from 'mongoose'
 
-export interface Product {
+export interface ProductType {
   _id: Types.ObjectId
   user: string
   name: string
@@ -26,12 +26,12 @@ export interface ProductUpdateData {
 }
 
 export interface CartItem {
-  product: Product
+  product: ProductType
   qty: number
 }
 
 export interface UserInfo {
-  _id?: Types.ObjectId
+  _id?: string
   name: string
   email: string
   isAdmin: boolean
@@ -72,7 +72,7 @@ export interface OrderItems {
   qty: number
   image: string
   price: number
-  product: Product
+  product: ProductType
 }
 
 export interface Order {

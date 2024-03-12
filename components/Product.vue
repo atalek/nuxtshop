@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { Product } from '~/types'
+import type { ProductType } from '~/types'
 defineProps({
   product: {
-    type: Object as PropType<Product>,
+    type: Object as PropType<ProductType>,
     required: true,
   },
 })
@@ -16,8 +16,7 @@ defineProps({
           provider="cloudinary"
           :src="product.image"
           class="card-img-top"
-          :alt="`An image of ${product.name}`"
-        />
+          :alt="`An image of ${product.name}`" />
       </div>
     </NuxtLink>
     <div class="card-body">
@@ -31,8 +30,7 @@ defineProps({
       <div class="card-text">
         <Rating
           :value="product.rating"
-          :text="`${product.numReviews} reviews`"
-        />
+          :text="`${product.numReviews} reviews`" />
       </div>
       <p class="card-text fs-4">${{ product.price }}</p>
     </div>

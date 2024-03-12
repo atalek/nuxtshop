@@ -16,7 +16,7 @@ export default defineEventHandler(async event => {
         id: body.id,
         status: 'paid',
         update_time: String(body.created),
-        email_address: user.email,
+        email_address: user?.email,
       }
       const updatedOrder = await order.save()
       return { statusCode: 201, updatedOrder }

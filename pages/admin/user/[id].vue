@@ -21,7 +21,7 @@ const email = ref('')
 const isAdmin = ref(false)
 
 async function updateUser() {
-  if (authStore.userInfo.isAdmin) {
+  if (authStore?.userInfo?.isAdmin) {
     const updateData = {
       name: name.value,
       email: email.value,

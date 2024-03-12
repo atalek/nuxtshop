@@ -14,7 +14,7 @@ const { data, error } = await useAsyncData(
   'orders',
 
   () =>
-    $fetch(`/api/orders/${page.value}`, {
+    $fetch(`/api/v1/orders/${page.value}`, {
       params: {
         page: page.value,
       },

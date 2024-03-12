@@ -1,5 +1,5 @@
 import Product from '~/server/models/productSchema'
-import { Product as Productt } from '~/types'
+import type { ProductType } from '~/types'
 
 export default defineEventHandler(async event => {
   const pageSize = 8
@@ -7,7 +7,7 @@ export default defineEventHandler(async event => {
 
   const count = await Product.countDocuments()
 
-  const products: Productt[] = await Product.find({})
+  const products: ProductType[] = await Product.find({})
     .limit(pageSize)
     .skip(pageSize * (page - 1))
     .lean()

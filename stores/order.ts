@@ -6,7 +6,7 @@ export const useOrderStore = defineStore({
   actions: {
     async placeOrder(order: PlaceOrder) {
       try {
-        const response = await $fetch('/api/orders', {
+        const response = await $fetch('/api/v1/orders', {
           method: 'POST',
           body: JSON.stringify(order),
           headers: { 'Content-Type': 'application/json' },
@@ -23,7 +23,7 @@ export const useOrderStore = defineStore({
     },
     async fetchMyOrders(): Promise<Order[]> {
       try {
-        const response = await $fetch('/api/orders/myorder')
+        const response = await $fetch('/api/v1/orders/myorder')
 
         return response as Order[]
       } catch (error) {
@@ -33,7 +33,7 @@ export const useOrderStore = defineStore({
     async fetchSingleOrder(orderId: string) {
       try {
         const { data, pending, error, refresh } = await useFetch(
-          `/api/orders/order/${orderId}`
+          `/api/v1/orders/order/${orderId}`,
         )
 
         return { data, pending, error, refresh }
@@ -43,7 +43,7 @@ export const useOrderStore = defineStore({
     },
     async payOrder(orderId: string, paymentIntent: PaymentIntent) {
       try {
-        await $fetch(`/api/orders/order/${orderId}/pay`, {
+        await $fetch(`/api/v1/orders/order/${orderId}/pay`, {
           method: 'POST',
           body: paymentIntent,
         })
@@ -53,7 +53,7 @@ export const useOrderStore = defineStore({
     },
     async deliverOrder(orderId: string) {
       try {
-        await $fetch(`/api/orders/order/${orderId}/delivered`, {
+        await $fetch(`/api/v1/orders/order/${orderId}/delivered`, {
           method: 'PUT',
         })
       } catch (error) {

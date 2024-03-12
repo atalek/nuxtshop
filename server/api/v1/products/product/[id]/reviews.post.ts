@@ -4,15 +4,17 @@ export default defineEventHandler(async event => {
   const user = event.context.user
   const id = event.context.params?.id
   const body = await readBody(event)
-  const { rating, comment } = body as {
-    rating: string
-    comment: string
-  }
+  const { rating, comment } = <
+    {
+      rating: string
+      comment: string
+    }
+  >body
 
   const product = await Product.findById(id)
   if (product) {
     const alreadyReviewed = product.reviews.find(
-      review => review.user.toString() === user._id.toString()
+      review => review.user.toString() === user?.id?.toString(),
     )
     if (alreadyReviewed) {
       throw createError({
@@ -21,10 +23,10 @@ export default defineEventHandler(async event => {
       })
     } else {
       const review = {
-        name: user.name,
+        name: user?.name,
         rating: Number(rating),
         comment,
-        user: user._id,
+        user: user?.id,
       }
       product.reviews.push(review)
       product.numReviews = product.reviews.length

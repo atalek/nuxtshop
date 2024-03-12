@@ -26,9 +26,8 @@ Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
 - Pinia
 - Bootstrap 5
 - Cloudinary
+- Lucia Auth
 - Stripe
-- BCrypt
-- JSON web token
 
 ## Setup
 
@@ -61,9 +60,6 @@ Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
    ```env
    # Mongodb
    MONGODB_URI=your_mongodb_uri
-
-   # JWT secret
-   JWT_SECRET=your_jwt_secret
 
    # Stripe
    STRIPE_PUBLIC_KEY=your_stripe_public_key

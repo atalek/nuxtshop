@@ -14,10 +14,10 @@ const orderStore = useOrderStore()
 
 const orders = await orderStore.fetchMyOrders()
 
-const userInfo = computed(() => authStore.userInfo as UserInfo)
+const userInfo = computed(() => authStore.userInfo)
 
-const name = ref(userInfo.value.name)
-const email = ref(userInfo.value.email)
+const name = ref(userInfo?.value?.name)
+const email = ref(userInfo?.value?.email)
 const password = ref('')
 const confirmPassword = ref('')
 
@@ -26,7 +26,7 @@ async function submitHandler() {
     toast.error('Passwords do not match')
   } else {
     const userData = {
-      _id: userInfo.value._id,
+      _id: userInfo?.value?.id,
       name: name?.value,
       email: email?.value,
       password: password?.value,
@@ -45,7 +45,7 @@ async function submitHandler() {
 
 <template>
   <div>
-    <Title>{{ userInfo.name }}</Title>
+    <Title>{{ userInfo?.name }}</Title>
     <div class="row">
       <div class="col-md-3">
         <h1>User Profile</h1>
@@ -114,7 +114,7 @@ async function submitHandler() {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="order in orders" :key="order._id">
+              <tr v-for="order in orders" :key="order._id.toString()">
                 <th scope="row">{{ order._id }}</th>
                 <td>{{ order.createdAt.substring(0, 10) }}</td>
                 <td>{{ formatPrice(order.totalPrice) }}</td>

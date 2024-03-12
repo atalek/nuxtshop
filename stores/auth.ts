@@ -1,61 +1,60 @@
 import { defineStore } from 'pinia'
-import { UserInfo, LoginInfo, User } from '~/types'
+import { UserInfo, LoginInfo } from '~/types'
+import { User } from 'lucia'
 
 export const useAuthStore = defineStore({
   id: 'auth',
   state: () => ({
-    userInfo: {} as UserInfo,
+    userInfo: null as User | null,
   }),
 
   actions: {
     async login(data: LoginInfo) {
       try {
-        const res = await $fetch('/api/users/login', {
+        const res = await $fetch('/api/v2/auth/login', {
           method: 'POST',
           body: data,
         })
         if (res) {
-          this.nuxtClientInit(res)
-          return res
+          window.location.reload()
+          return 'Logged in'
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         throw error
       }
     },
     async register(data: User) {
       try {
-        const res = await $fetch('/api/users/register', {
+        const res = await $fetch('/api/v2/auth/register', {
           method: 'POST',
           body: data,
         })
         if (res) {
-          this.nuxtClientInit(res)
-          return res
+          return 'Registered successfully'
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         throw error
       }
     },
     async logout() {
       try {
-        await $fetch('/api/users/logout', {
+        await $fetch('/api/v2/auth/logout', {
           method: 'POST',
         })
         this.clearLocalStorage()
-        // @ts-ignore
-        this.userInfo = {}
+        window.location.reload()
       } catch (error: any) {
         throw error
       }
     },
     async updateProfile(data: User) {
       try {
-        const res = await $fetch('/api/users/profile', {
+        const res = await $fetch('/api/v1/users/profile', {
           method: 'PUT',
           body: data,
         })
         if (res) {
-          this.userInfo = res
+          window.location.reload()
         }
       } catch (error: any) {
         throw error
@@ -71,8 +70,8 @@ export const useAuthStore = defineStore({
       // @ts-ignore
       this.userInfo = undefined
     },
-    nuxtClientInit(value: UserInfo) {
-      this.userInfo = value
+    nuxtClientInit(value: User) {
+      if (value) this.userInfo = value
     },
   },
 })

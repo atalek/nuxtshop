@@ -3,7 +3,7 @@ import { useCartStore } from '~/stores/cart'
 import { useAuthStore } from '~/stores/auth'
 import { toast } from 'vue3-toastify'
 import { useProductStore } from '~/stores/products'
-import { Product } from '~/types'
+import type { ProductType } from '~/types'
 
 const cartStore = useCartStore()
 const authStore = useAuthStore()
@@ -14,7 +14,7 @@ const productId = route.params.id as string
 const productStore = useProductStore()
 await productStore.fetchProduct(productId)
 
-const product = computed(() => productStore.product as Product)
+const product = computed(() => productStore.product as ProductType)
 
 const rating = ref(0)
 const comment = ref('')

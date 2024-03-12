@@ -6,42 +6,28 @@ export default defineEventHandler(async event => {
   const route = event.node.req.url as string
 
   const excludedRoutes = [
-    '/api/users/login',
-    '/api/users/register',
-    '/api/users/logout',
-    '/api/products/create',
+    '/api/v2/auth/login',
+    '/api/v2/auth/register',
+    '/api/v2/auth/logout',
+    '/api/v2/user',
+    '/api/v1/products/create',
   ]
 
   if (
-    (!excludedRoutes.includes(route) && route.startsWith('/api/orders')) ||
-    route.startsWith('/api/users/profile') ||
-    route.startsWith('/api/users/admin/') ||
-    route.startsWith('/api/products/admin') ||
-    route.startsWith('/api/products/create') ||
+    (!excludedRoutes.includes(route) && route.startsWith('/api/v1/orders')) ||
+    route.startsWith('/api/v1/users/profile') ||
+    route.startsWith('/api/v1/users/admin/') ||
+    route.startsWith('/api/v1/products/admin') ||
+    route.startsWith('/api/v1/products/create') ||
     route.endsWith('/edit') ||
     route.endsWith('/reviews') ||
     route.endsWith('/delete') ||
     route.endsWith('/admin')
   ) {
-    let token
+    const user = event.context.user
+    const session = event.context.session
 
-    token = getCookie(event, 'jwt')
-
-    if (token) {
-      try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
-          userId: Types.ObjectId
-        }
-        const user = await User.findById(decoded.userId).select('-password')
-
-        event.context.user = user
-      } catch (error) {
-        throw createError({
-          statusCode: 401,
-          statusMessage: 'Not authorized, token failed',
-        })
-      }
-    } else {
+    if (!user || !session) {
       throw createError({
         statusCode: 401,
         statusMessage: 'Not authorized, no token',

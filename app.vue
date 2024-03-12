@@ -5,9 +5,9 @@ import { useAuthStore } from '~/stores/auth'
 const cartStore = useCartStore()
 const authStore = useAuthStore()
 
-const userData = useCookie('auth')
+const user = useUser()
 
-authStore.nuxtClientInit(userData.value)
+authStore.nuxtClientInit(user.value)
 
 if (process.client) {
   cartStore.nuxtClientInit()

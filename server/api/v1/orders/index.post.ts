@@ -35,7 +35,7 @@ export default defineEventHandler(async event => {
       const updateStockPromise = Product.findByIdAndUpdate(
         item.product._id,
         { $inc: { countInStock: -item.qty } },
-        { new: true }
+        { new: true },
       )
 
       updateStockPromises.push(updateStockPromise)
@@ -47,7 +47,10 @@ export default defineEventHandler(async event => {
 
     const order = new Order({
       orderItems: orderItemsWithProductData,
-      user: user,
+      user: {
+        _id: user?.id,
+        ...user,
+      },
       shippingAddress,
       paymentMethod,
       itemsPrice,

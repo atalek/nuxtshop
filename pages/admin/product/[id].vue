@@ -27,7 +27,7 @@ const countInStock = ref(0)
 const description = ref('')
 
 async function updateProduct() {
-  if (authStore.userInfo.isAdmin) {
+  if (authStore?.userInfo?.isAdmin) {
     const updateData = [
       name.value,
       price.value,

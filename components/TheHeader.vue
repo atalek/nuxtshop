@@ -5,13 +5,11 @@ import { toast } from 'vue3-toastify'
 
 const cartStore = useCartStore()
 const authStore = useAuthStore()
-const userData = useCookie('auth')
 
 async function logoutHandler() {
   try {
     authStore.logout()
     cartStore.clear()
-    // userData.value = undefined
   } catch (error: any) {
     toast.error(error.data.message)
   }
@@ -26,6 +24,8 @@ const isLinkActive = (to: string) => {
 const isAdminActive = computed(() => {
   return route.path.includes('/admin')
 })
+
+const user = useUser()
 </script>
 
 <template>
@@ -68,9 +68,7 @@ const isAdminActive = computed(() => {
               </NuxtLink>
             </li>
 
-            <li
-              class="nav-item dropdown"
-              v-if="authStore.userInfo !== undefined">
+            <li class="nav-item dropdown" v-if="authStore.userInfo">
               <div class="dropdown">
                 <div
                   class="nav-link dropdown-toggle"
@@ -78,7 +76,7 @@ const isAdminActive = computed(() => {
                   data-bs-toggle="dropdown"
                   style="cursor: pointer"
                   :class="{ active: isLinkActive('/profile') }">
-                  {{ authStore.userInfo.name }}
+                  {{ authStore?.userInfo?.name }}
                 </div>
                 <ul
                   class="dropdown-menu"
@@ -110,13 +108,11 @@ const isAdminActive = computed(() => {
             </li>
             <div
               class="dropdown"
-              v-if="
-                authStore.userInfo !== undefined && authStore.userInfo.isAdmin
-              ">
+              v-if="authStore?.userInfo && authStore?.userInfo?.isAdmin">
               <div
                 :class="{ active: isAdminActive }"
                 class="nav-link dropdown-toggle"
-                id="admin-pannel-navbarDropdownMenuLink"
+                id="admin-panel-navbarDropdownMenuLink"
                 data-bs-toggle="dropdown"
                 style="cursor: pointer">
                 Admin

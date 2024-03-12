@@ -27,12 +27,11 @@ async function submitHandler() {
   }
 }
 
-const isLoggedIn = () => {
-  if (authStore.userInfo !== undefined) {
+function isLoggedIn() {
+  if (authStore.userInfo) {
     return navigateTo(redirect as RouteLocationRaw)
   }
 }
-
 isLoggedIn()
 </script>
 

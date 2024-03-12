@@ -4,7 +4,7 @@ const page = ref(1)
 const { data } = await useAsyncData(
   'products',
   () =>
-    $fetch(`/api/products/${page.value}`, {
+    $fetch(`/api/v1/products/${page.value}`, {
       params: {
         page: page.value,
       },

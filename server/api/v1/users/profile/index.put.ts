@@ -12,14 +12,9 @@ export default defineEventHandler(async event => {
       user.password = body.password
     }
 
-    const updatedUser = await user.save()
+    await user.save()
 
-    return {
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
-    }
+    return 'Profile Updated'
   } else {
     throw createError({
       statusCode: 404,

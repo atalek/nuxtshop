@@ -1,7 +1,7 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  const userData = useCookie('auth')
+  const user = useUser()
 
-  if (userData && !userData?.value?.isAdmin) {
+  if (!user.value || !user?.value?.isAdmin) {
     return navigateTo('/')
   }
 })

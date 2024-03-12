@@ -12,10 +12,10 @@ definePageMeta({
 
 const page = ref(1)
 
-const { data, error, refresh } = await useAsyncData(
+const { data, pending, error, refresh } = await useAsyncData(
   'users',
   () =>
-    $fetch(`/api/users/admin/${page.value}`, {
+    $fetch(`/api/v1/users/admin/${page.value}`, {
       params: {
         page: page.value,
       },
@@ -28,7 +28,7 @@ function refetch(pageNumber: number) {
 }
 
 async function deleteHandler(userId: string) {
-  if (authStore.userInfo.isAdmin) {
+  if (authStore.userInfo && authStore?.userInfo?.isAdmin) {
     try {
       await adminStore.deleteUser(userId)
       refresh()
@@ -61,7 +61,7 @@ async function deleteHandler(userId: string) {
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="!error && !pending">
           <tr v-for="user in data!.users" :key="user._id">
             <th scope="row">{{ user._id }}</th>
             <td>{{ user.name }}</td>
@@ -92,7 +92,7 @@ async function deleteHandler(userId: string) {
           </tr>
         </tbody>
       </table>
-      <Paginate @change="refetch" :pages="data!.pages" :page="page" />
+      <Paginate @change="refetch" :pages="data?.pages" :page="page" />
     </div>
   </div>
 </template>

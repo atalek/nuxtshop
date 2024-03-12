@@ -28,7 +28,7 @@ async function deliverOrder() {
 async function proceedToCheckout() {
   try {
     isLoading.value = true
-    const res = await $fetch('/api/stripe/checkout', {
+    const res = await $fetch('/api/v1/stripe/checkout', {
       method: 'POST',
       body: order?.value,
     })

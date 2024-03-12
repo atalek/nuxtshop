@@ -11,11 +11,11 @@ definePageMeta({
 
 const page = ref(1)
 
-const { data, refresh } = await useAsyncData(
+const { data, error, pending, refresh } = await useAsyncData(
   'products',
 
   () =>
-    $fetch(`/api/products/admin/${page.value}`, {
+    $fetch(`/api/v1/products/admin/${page.value}`, {
       params: {
         page: page.value,
       },
@@ -28,10 +28,10 @@ function refetch(pageNumber: number) {
 }
 
 async function createProduct() {
-  if (authStore.userInfo !== undefined && authStore.userInfo.isAdmin) {
+  if (authStore.userInfo && authStore?.userInfo?.isAdmin) {
     if (window.confirm('Are you sure you want to create a new product?')) {
       try {
-        await $fetch('/api/products/create', { method: 'POST' })
+        await $fetch('/api/v1/products/create', { method: 'POST' })
         refresh()
         toast.success('Product created')
       } catch (error: any) {
@@ -42,9 +42,9 @@ async function createProduct() {
 }
 
 async function deleteHandler(productId: string) {
-  if (authStore.userInfo.isAdmin) {
+  if (authStore?.userInfo?.isAdmin) {
     try {
-      await $fetch(`/api/products/product/${productId}/delete`, {
+      await $fetch(`/api/v1/products/product/${productId}/delete`, {
         method: 'POST',
       })
       refresh()
@@ -84,8 +84,8 @@ async function deleteHandler(productId: string) {
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="product in data!.products" :key="product._id">
+        <tbody v-if="!error && !pending">
+          <tr v-for="product in data!.products" :key="product._id.toString()">
             <td>{{ product._id }}</td>
             <td>{{ product.name }}</td>
             <td>{{ formatPrice(product.price) }}</td>
@@ -109,7 +109,7 @@ async function deleteHandler(productId: string) {
           </tr>
         </tbody>
       </table>
-      <Paginate @change="refetch" :pages="data!.pages" :page="page" />
+      <Paginate @change="refetch" :pages="data?.pages" :page="page" />
     </div>
   </div>
 </template>

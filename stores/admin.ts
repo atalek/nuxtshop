@@ -9,7 +9,7 @@ export const useAdminStore = defineStore({
   actions: {
     async fetchSingleUser(userId: string) {
       try {
-        const response = await $fetch(`/api/users/admin/user/${userId}`, {
+        const response = await $fetch(`/api/v1/users/admin/user/${userId}`, {
           method: 'GET',
         })
         this.user = response as UserInfo
@@ -19,7 +19,7 @@ export const useAdminStore = defineStore({
     },
     async updateUser(userId: string, data: UpdateUserData) {
       try {
-        const response = await $fetch(`/api/users/admin/user/${userId}`, {
+        const response = await $fetch(`/api/v1/users/admin/user/${userId}`, {
           method: 'PUT',
           body: JSON.stringify(data),
         })
@@ -31,7 +31,7 @@ export const useAdminStore = defineStore({
     },
     async deleteUser(userId: string) {
       try {
-        await $fetch(`/api/users/admin/user/${userId}`, { method: 'DELETE' })
+        await $fetch(`/api/v1/users/admin/user/${userId}`, { method: 'DELETE' })
       } catch (error) {
         throw error
       }

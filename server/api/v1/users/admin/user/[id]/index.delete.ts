@@ -17,7 +17,7 @@ export default defineEventHandler(async event => {
         })
       }
 
-      await User.deleteOne({ _id: user._id })
+      await User.deleteOne({ _id: user.id })
       return { status: 200, message: 'User deleted successfully' }
     } else {
       throw createError({
