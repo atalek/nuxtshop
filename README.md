@@ -1,6 +1,6 @@
 # NuxtShop eCommerce Platform
 
-![Landing page](https://res.cloudinary.com/dkofkuquf/image/upload/v1705788590/nuxtshop/a06r0otgt0uj3liz1tjn.png)
+![Landing page](https://atal-portfolio.pages.dev/_nuxt/project2.BgN5emaR.webp)
 
 Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
 
