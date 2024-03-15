@@ -1,7 +1,3 @@
-import jwt from 'jsonwebtoken'
-import User from '../models/userSchema'
-import { Types } from 'mongoose'
-
 export default defineEventHandler(async event => {
   const route = event.node.req.url as string
 

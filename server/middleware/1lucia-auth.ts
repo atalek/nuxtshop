@@ -4,8 +4,6 @@ import type { Session, User } from 'lucia'
 import { lucia } from '../utils/auth'
 
 export default defineEventHandler(async event => {
-  const route = event.node.req.url as string
-
   if (event.method !== 'GET') {
     const originHeader = getHeader(event, 'Origin') ?? null
     const hostHeader = getHeader(event, 'Host') ?? null
