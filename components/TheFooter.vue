@@ -12,7 +12,7 @@ const currentYear = new Date().getFullYear()
             target="_blank"
             class="flex align-items-center text-center footer-link"
             >NuxtShop &copy; {{ currentYear }} - Made by Amphei
-            <Icon name="fa6-brands:github" height="24" width="24"
+            <Icon name="fa6-brands:github" height="18" width="18"
           /></NuxtLink>
         </div>
       </div>
@@ -23,6 +23,6 @@ const currentYear = new Date().getFullYear()
 <style scoped>
 .footer-link {
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 </style>
