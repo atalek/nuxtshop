@@ -1,6 +1,6 @@
 # NuxtShop eCommerce Platform
 
-![Landing page](https://atal-portfolio.pages.dev/_nuxt/project2.BgN5emaR.webp)
+![Landing page](https://res.cloudinary.com/dkofkuquf/image/upload/v1711042501/nuxtshop/nk9tzzyx71jsflhu9oar.webp)
 
 Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
 
@@ -34,7 +34,7 @@ Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
 1. **Clone the repository.**
 
    ```bash
-   git clone https://github.com/Amphei/nuxtshop.git
+   git clone https://github.com/atalek/nuxtshop.git
 
    ```
 
@@ -96,7 +96,6 @@ Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
 
 ## Author
 
-Github [@Amphei](https://github.com/Amphei) <br> Linkedin:
+Github [@atalek](https://github.com/atalek) <br> Linkedin:
 [@Aleksandar Atanasovski](https://www.linkedin.com/in/aleksandar-atanasovski-16b123263/)
-<br> Portfolio:
-[https://atal-portfolio.pages.dev/](https://atal-portfolio.pages.dev/)
+<br> Portfolio: [https://www.atalek.com/](https://www.atalek.com/)
