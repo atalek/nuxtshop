@@ -46,6 +46,14 @@ const imageUrl = useRuntimeConfig().public.imageUrl
 useHead({
   meta: [
     {
+      property: 'og:title',
+      content: product.value.name,
+    },
+    {
+      property: 'twitter:title',
+      content: product.value.name,
+    },
+    {
       property: 'og:image',
 
       content: `${imageUrl}/${product.value.image}`,
