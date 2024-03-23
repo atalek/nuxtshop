@@ -29,6 +29,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      imageUrl: process.env.CLOUDINARY,
       cloudinaryName: process.env.CLOUDINARY_NAME,
       cloudinaryFolder: process.env.CLOUDINARY_FOLDER,
       stripePublic: process.env.STRIPE_PUBLIC_KEY,

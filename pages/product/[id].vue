@@ -42,6 +42,46 @@ async function createReview() {
     }
   }
 }
+const imageUrl = useRuntimeConfig().public.imageUrl
+useHead({
+  meta: [
+    {
+      property: 'og:image',
+
+      content: `${imageUrl}/${product.value.image}`,
+    },
+    {
+      name: 'description',
+      content: product.value.description,
+    },
+    {
+      property: 'og:description',
+      content: product.value.description,
+    },
+    {
+      property: 'twitter:description',
+      content: product.value.description,
+    },
+    {
+      property: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      property: 'og:url',
+      content: `https://nuxtshop-yep.vercel.app/product/${productId}`,
+    },
+
+    {
+      property: 'twitter:url',
+      content: `https://nuxtshop-yep.vercel.app/product/${productId}`,
+    },
+
+    {
+      property: 'twitter:image',
+      content: `${imageUrl}/${product.value.image}`,
+    },
+  ],
+})
 </script>
 
 <template>
