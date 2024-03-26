@@ -92,7 +92,7 @@ Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
 
 ## Live Version
 
-[https://nuxtshop-yep.vercel.app/](https://nuxtshop-yep.vercel.app/)
+[https://nuxtshop-yep.atalek.com/](https://nuxtshop-yep.atalek.com/)
 
 ## Author
 

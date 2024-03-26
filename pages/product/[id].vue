@@ -76,12 +76,12 @@ useHead({
     },
     {
       property: 'og:url',
-      content: `https://nuxtshop-yep.vercel.app/product/${productId}`,
+      content: `https://nuxtshop.atalek.com/product/${productId}`,
     },
 
     {
       property: 'twitter:url',
-      content: `https://nuxtshop-yep.vercel.app/product/${productId}`,
+      content: `https://nuxtshop.atalek.com/product/${productId}`,
     },
 
     {

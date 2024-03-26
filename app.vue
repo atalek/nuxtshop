@@ -35,7 +35,7 @@ useHead({
     },
     { name: 'author', content: 'Aleksandar Atanasovski' },
     { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://nuxtshop-yep.vercel.app' },
+    { property: 'og:url', content: 'https://nuxtshop.atalek.com' },
     {
       property: 'og:title',
       content: 'NuxtShop - Shop Your Style, Effortlessly  ✨',
@@ -54,7 +54,7 @@ useHead({
       property: 'twitter:card',
       content: 'summary_large_image',
     },
-    { property: 'twitter:url', content: 'https://nuxtshop-yep.vercel.app' },
+    { property: 'twitter:url', content: 'https://nuxtshop.atalek.com' },
     {
       property: 'twitter:title',
       content: 'NuxtShop - Shop Your Style, Effortlessly  ✨',
