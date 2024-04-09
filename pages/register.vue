@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { useAuthStore } from '~/stores/auth'
 import { toast } from 'vue3-toastify'
-import { RouteLocationRaw } from '#vue-router'
 
 const authStore = useAuthStore()
 
@@ -14,7 +13,7 @@ const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
 
-async function submitHandler() {
+async function registerUser() {
   if (password.value !== confirmPassword.value) {
     toast.error('The passwords do not match!')
   } else {
@@ -26,7 +25,7 @@ async function submitHandler() {
     try {
       const res = await authStore.register(data)
       if (res) {
-        navigateTo(redirect as RouteLocationRaw)
+        navigateTo(redirect)
       }
     } catch (error: any) {
       toast.error(error.data.message)
@@ -36,22 +35,10 @@ async function submitHandler() {
 
 function isLoggedIn() {
   if (authStore.userInfo) {
-    return navigateTo(redirect as RouteLocationRaw)
+    return navigateTo(redirect)
   }
 }
 isLoggedIn()
-
-async function register2() {
-  const data = {
-    name: name.value.trimEnd(),
-    email: email.value.trim(),
-    password: password.value.trim(),
-  }
-  const res = await $fetch('/api/v2/auth/register', {
-    method: 'POST',
-    body: data,
-  })
-}
 </script>
 
 <template>
@@ -59,7 +46,7 @@ async function register2() {
     <Title>{{ 'Register' }}</Title>
     <FormContainer>
       <h1>Register</h1>
-      <form @submit.prevent="register2">
+      <form @submit.prevent="registerUser">
         <div class="form-group my-2">
           <label for="name" class="form-label">Name:</label>
           <input

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { useAuthStore } from '~/stores/auth'
 import { toast } from 'vue3-toastify'
-import { RouteLocationRaw } from '#vue-router'
 
 const authStore = useAuthStore()
 
@@ -20,7 +19,7 @@ async function submitHandler() {
   try {
     const res = await authStore.login(data)
     if (res) {
-      return navigateTo(redirect as RouteLocationRaw)
+      return navigateTo(redirect)
     }
   } catch (error: any) {
     toast.error('Invalid username or password')
@@ -29,7 +28,7 @@ async function submitHandler() {
 
 function isLoggedIn() {
   if (authStore.userInfo) {
-    return navigateTo(redirect as RouteLocationRaw)
+    return navigateTo(redirect)
   }
 }
 isLoggedIn()

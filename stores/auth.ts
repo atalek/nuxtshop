@@ -30,6 +30,7 @@ export const useAuthStore = defineStore({
           body: data,
         })
         if (res) {
+          window.location.reload()
           return 'Registered successfully'
         }
       } catch (error: unknown) {
