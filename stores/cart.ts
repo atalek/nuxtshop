@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { Product, CartItem, ShippingAddress } from '~/types'
+import type { ProductType, CartItem, ShippingAddress } from '~/types'
 
 export const useCartStore = defineStore({
   id: 'cart',
@@ -41,12 +41,12 @@ export const useCartStore = defineStore({
       localStorage.setItem('cart', JSON.stringify(this.items))
       localStorage.setItem(
         'shippingAddress',
-        JSON.stringify(this.shippingAddress)
+        JSON.stringify(this.shippingAddress),
       )
       localStorage.setItem('paymentMethod', JSON.stringify(this.paymentMethod))
     },
 
-    nuxtClientInit() {
+    loadCart() {
       const storedCart = localStorage.getItem('cart')
       if (storedCart) {
         this.items = JSON.parse(storedCart)
@@ -61,7 +61,7 @@ export const useCartStore = defineStore({
       }
     },
 
-    addItem(item: Product) {
+    addItem(item: ProductType) {
       const existingItem = this.items.find(i => i.product._id === item._id)
       if (existingItem) {
         existingItem.qty++
@@ -74,9 +74,9 @@ export const useCartStore = defineStore({
       this.saveCartToLocalStorage()
     },
 
-    removeItem(item: Product) {
+    removeItem(item: ProductType) {
       const existingItemIndex = this.items.findIndex(
-        i => i.product._id === item._id
+        i => i.product._id === item._id,
       )
       if (existingItemIndex !== -1) {
         this.items.splice(existingItemIndex, 1)
@@ -87,7 +87,7 @@ export const useCartStore = defineStore({
       this.shippingAddress = address
       localStorage.setItem(
         'shippingAddress',
-        JSON.stringify(this.shippingAddress)
+        JSON.stringify(this.shippingAddress),
       )
     },
     savePaymentMethod(paymentMethod: string) {

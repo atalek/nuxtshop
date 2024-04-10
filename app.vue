@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import { useCartStore } from '~/stores/cart'
-import { useAuthStore } from '~/stores/auth'
 
 const cartStore = useCartStore()
-const authStore = useAuthStore()
-
-const user = useUser()
-
-authStore.nuxtClientInit(user.value)
 
 if (process.client) {
-  cartStore.nuxtClientInit()
+  cartStore.loadCart()
 }
 
 useHead({

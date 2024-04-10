@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { PlaceOrder, Order, PaymentIntent } from '~/types'
+import type { PlaceOrder, Order, PaymentIntent } from '~/types'
 
 export const useOrderStore = defineStore({
   id: 'order',

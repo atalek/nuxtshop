@@ -4,9 +4,9 @@ import { useOrderStore } from '~/stores/order'
 import { toast } from 'vue3-toastify'
 import formatPrice from '~/utils/formatter'
 
-// definePageMeta({
-//   middleware: 'unauthenticated',
-// })
+definePageMeta({
+  middleware: 'unauthenticated',
+})
 
 const authStore = useAuthStore()
 const orderStore = useOrderStore()

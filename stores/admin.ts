@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { UserInfo, UpdateUserData } from '~/types'
+import type { UserInfo, UpdateUserData } from '~/types'
 
 export const useAdminStore = defineStore({
   id: 'admin',

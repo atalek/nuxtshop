@@ -54,9 +54,6 @@ export const useAuthStore = defineStore({
           method: 'PUT',
           body: data,
         })
-        if (res) {
-          window.location.reload()
-        }
       } catch (error: any) {
         throw error
       }
@@ -71,7 +68,7 @@ export const useAuthStore = defineStore({
       // @ts-ignore
       this.userInfo = undefined
     },
-    nuxtClientInit(value: User) {
+    loadUser(value: User) {
       if (value) this.userInfo = value
     },
   },
