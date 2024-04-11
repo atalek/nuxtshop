@@ -37,6 +37,10 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    '/': { isr: 3600 * 24 },
+    '/product/**': { isr: 3600 },
+    '/login': { prerender: true },
+    '/register': { prerender: true },
     '/order/**': { ssr: false },
     '/profile': { ssr: false },
     '/admin/**': { ssr: false },
