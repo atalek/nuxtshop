@@ -8,8 +8,8 @@ const route = useRoute()
 const sp = route.query.redirect
 const redirect = sp || '/'
 
-const email = ref('')
-const password = ref('')
+const email = ref('john@email.com')
+const password = ref('password')
 
 async function submitHandler() {
   const data = {
@@ -41,7 +41,11 @@ isLoggedIn()
       <h1>Sign in</h1>
       <form @submit.prevent="submitHandler">
         <div class="form-group my-2">
-          <label for="email" class="form-label">Email Address:</label>
+          <label
+            for="email"
+            class="form-label"
+            >Email Address:</label
+          >
           <input
             placeholder="Enter email"
             v-model="email"
@@ -52,7 +56,11 @@ isLoggedIn()
         </div>
 
         <div class="form-group my-2">
-          <label for="password" class="form-label">Password:</label>
+          <label
+            for="password"
+            class="form-label"
+            >Password:</label
+          >
           <input
             type="password"
             placeholder="Enter password"

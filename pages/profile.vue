@@ -50,8 +50,13 @@ async function submitHandler() {
         <h1>User Profile</h1>
         <form @submit.prevent="submitHandler">
           <div class="form-group my-2">
-            <label for="name" class="form-label">Name:</label>
+            <label
+              for="name"
+              class="form-label"
+              >Name:</label
+            >
             <input
+              :disabled="userInfo.email === 'john@email.com'"
               placeholder="Enter name"
               v-model="name"
               type="text"
@@ -60,8 +65,13 @@ async function submitHandler() {
               class="form-control" />
           </div>
           <div class="form-group my-2">
-            <label for="email" class="form-label">Email:</label>
+            <label
+              for="email"
+              class="form-label"
+              >Email:</label
+            >
             <input
+              :disabled="userInfo.email === 'john@email.com'"
               placeholder="Enter email"
               v-model="email"
               type="email"
@@ -71,8 +81,13 @@ async function submitHandler() {
           </div>
 
           <div class="form-group my-2">
-            <label for="password" class="form-label">Password:</label>
+            <label
+              for="password"
+              class="form-label"
+              >Password:</label
+            >
             <input
+              :disabled="userInfo.email === 'john@email.com'"
               placeholder="Enter password"
               v-model="password"
               type="password"
@@ -81,10 +96,13 @@ async function submitHandler() {
               class="form-control" />
           </div>
           <div class="form-group my-2">
-            <label for="confirmPassword" class="form-label"
+            <label
+              for="confirmPassword"
+              class="form-label"
               >Confirm Password:</label
             >
             <input
+              :disabled="userInfo.email === 'john@email.com'"
               placeholder="Enter confirmPassword"
               v-model="confirmPassword"
               type="password"
@@ -92,7 +110,10 @@ async function submitHandler() {
               id="confirmPassword"
               class="form-control" />
           </div>
-          <button type="submit" class="btn btn-primary mt-2 w-100">
+          <button
+            :disabled="userInfo.email === 'john@email.com'"
+            type="submit"
+            class="btn btn-primary mt-2 w-100">
             Update
           </button>
         </form>
@@ -113,7 +134,9 @@ async function submitHandler() {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="order in orders" :key="order._id.toString()">
+              <tr
+                v-for="order in orders"
+                :key="order._id.toString()">
                 <th scope="row">{{ order._id }}</th>
                 <td>{{ order.createdAt.substring(0, 10) }}</td>
                 <td>{{ formatPrice(order.totalPrice) }}</td>
@@ -122,7 +145,9 @@ async function submitHandler() {
                     {{ order.paidAt.substring(0, 10) }}
                   </template>
                   <template v-else>
-                    <Icon name="heroicons-solid:x" style="color: red" />
+                    <Icon
+                      name="heroicons-solid:x"
+                      style="color: red" />
                   </template>
                 </td>
                 <td>
@@ -130,7 +155,9 @@ async function submitHandler() {
                     {{ order.deliveredAt.substring(0, 10) }}
                   </template>
                   <template v-else>
-                    <Icon name="heroicons-solid:x" style="color: red" />
+                    <Icon
+                      name="heroicons-solid:x"
+                      style="color: red" />
                   </template>
                 </td>
                 <td>
@@ -148,3 +175,11 @@ async function submitHandler() {
     </div>
   </div>
 </template>
+
+<style scoped>
+input:disabled,
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all;
+}
+</style>
