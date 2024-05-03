@@ -43,6 +43,7 @@ export const useAuthStore = defineStore({
           method: 'POST',
         })
         this.clearLocalStorage()
+        this.userInfo = null
         window.location.reload()
       } catch (error: any) {
         throw error
