@@ -6,6 +6,12 @@ defineProps({
     required: true,
   },
 })
+
+const imageLoaded = ref(false)
+
+function onImageLoad() {
+  imageLoaded.value = true
+}
 </script>
 
 <template>
@@ -22,9 +28,11 @@ defineProps({
     <div class="card-body">
       <NuxtLink :to="`/product/${product._id}`">
         <div class="card-title product-title">
-          <strong class="product-name" :data-full-title="product?.name">{{
-            product.name
-          }}</strong>
+          <strong
+            class="product-name"
+            :data-full-title="product?.name"
+            >{{ product.name }}</strong
+          >
         </div>
       </NuxtLink>
       <div class="card-text">
@@ -63,5 +71,9 @@ defineProps({
   display: block;
   opacity: 1;
   transform: translateX(-50%) translateY(-5px);
+}
+
+img {
+  object-fit: contain;
 }
 </style>

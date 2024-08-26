@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   app: {
     head: {
       charset: 'utf-8',
@@ -27,6 +28,7 @@ export default defineNuxtConfig({
       baseURL: process.env.CLOUDINARY,
     },
   },
+
   runtimeConfig: {
     public: {
       imageUrl: process.env.CLOUDINARY,
@@ -48,4 +50,6 @@ export default defineNuxtConfig({
     '/payment': { ssr: false },
     '/placeorder': { ssr: false },
   },
+
+  compatibilityDate: '2024-08-26',
 })

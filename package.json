@@ -11,24 +11,24 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.7.4",
+    "nuxt": "^3.13.0",
     "nuxt-icon": "^0.5.0",
-    "nuxt-vercel-analytics": "^0.2.2",
-    "vue": "^3.3.4",
-    "vue-router": "^4.2.5"
+    "nuxt-vercel-analytics": "^0.2.3",
+    "vue": "^3.4.38",
+    "vue-router": "^4.4.3"
   },
   "dependencies": {
     "@lucia-auth/adapter-mongodb": "^1.0.3",
-    "@nuxt/image": "^1.0.0-rc.3",
-    "@pinia/nuxt": "^0.5.0",
-    "@types/bcryptjs": "^2.4.4",
+    "@nuxt/image": "^1.7.0",
+    "@pinia/nuxt": "^0.5.4",
+    "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
-    "bootstrap": "^5.3.2",
-    "lucia": "^3.1.1",
-    "nuxt-mongoose": "^1.0.5",
-    "oslo": "^1.1.3",
-    "pinia": "^2.1.7",
-    "stripe": "^14.13.0",
-    "vue3-toastify": "^0.1.13"
+    "bootstrap": "^5.3.3",
+    "lucia": "^3.2.0",
+    "nuxt-mongoose": "^1.0.6",
+    "oslo": "^1.2.1",
+    "pinia": "^2.2.2",
+    "stripe": "^14.25.0",
+    "vue3-toastify": "^0.1.14"
   }
 }

@@ -56,7 +56,7 @@ async function submitHandler() {
               >Name:</label
             >
             <input
-              :disabled="userInfo.email === 'john@email.com'"
+              :disabled="userInfo?.email === 'john@email.com'"
               placeholder="Enter name"
               v-model="name"
               type="text"
@@ -71,7 +71,7 @@ async function submitHandler() {
               >Email:</label
             >
             <input
-              :disabled="userInfo.email === 'john@email.com'"
+              :disabled="userInfo?.email === 'john@email.com'"
               placeholder="Enter email"
               v-model="email"
               type="email"
@@ -87,7 +87,7 @@ async function submitHandler() {
               >Password:</label
             >
             <input
-              :disabled="userInfo.email === 'john@email.com'"
+              :disabled="userInfo?.email === 'john@email.com'"
               placeholder="Enter password"
               v-model="password"
               type="password"
@@ -102,7 +102,7 @@ async function submitHandler() {
               >Confirm Password:</label
             >
             <input
-              :disabled="userInfo.email === 'john@email.com'"
+              :disabled="userInfo?.email === 'john@email.com'"
               placeholder="Enter confirmPassword"
               v-model="confirmPassword"
               type="password"
@@ -111,7 +111,7 @@ async function submitHandler() {
               class="form-control" />
           </div>
           <button
-            :disabled="userInfo.email === 'john@email.com'"
+            :disabled="userInfo?.email === 'john@email.com'"
             type="submit"
             class="btn btn-primary mt-2 w-100">
             Update
