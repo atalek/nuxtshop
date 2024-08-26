@@ -78,3 +78,8 @@ useHead({
     </NuxtLayout>
   </div>
 </template>
+
+<style>
+@import '@/assets/styles/bootstrap.custom.css';
+@import '~/assets/styles/index.css';
+</style>
