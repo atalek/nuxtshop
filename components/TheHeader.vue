@@ -32,13 +32,14 @@ const user = useUser()
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <div class="container">
-        <NuxtLink class="navbar-brand" to="/">
+        <NuxtLink
+          class="navbar-brand"
+          to="/">
           <img
             src="~/assets/nuxt.png"
             alt="nuxtshop logo"
             style="width: 40px; height: 40px" />
-          <span style="color: rgb(67, 238, 67); margin-left: 5px">Nuxt</span
-          >Shop
+          <span style="color: rgb(67, 238, 67); margin-left: 5px">Nuxt</span>Shop
         </NuxtLink>
         <button
           class="navbar-toggler"
@@ -49,7 +50,9 @@ const user = useUser()
           aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div
+          class="collapse navbar-collapse"
+          id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <SearchBox />
@@ -62,13 +65,17 @@ const user = useUser()
                 to="/cart">
                 <Icon name="fa6-solid:cart-shopping" />
                 Cart
-                <span v-show="cartStore.totalCount > 0" class="cart-count">{{
-                  cartStore.totalCount
-                }}</span>
+                <span
+                  v-show="cartStore.totalCount > 0"
+                  class="cart-count"
+                  >{{ cartStore.totalCount }}</span
+                >
               </NuxtLink>
             </li>
 
-            <li class="nav-item dropdown" v-if="authStore.userInfo">
+            <li
+              class="nav-item dropdown"
+              v-if="authStore.userInfo">
               <div class="dropdown">
                 <div
                   class="nav-link dropdown-toggle"
@@ -82,7 +89,9 @@ const user = useUser()
                   class="dropdown-menu"
                   aria-labelledby="user-profile-navbarDropdownMenuLink">
                   <li>
-                    <NuxtLink class="dropdown-item" to="/profile"
+                    <NuxtLink
+                      class="dropdown-item"
+                      to="/profile"
                       >Profile</NuxtLink
                     >
                   </li>
@@ -98,7 +107,9 @@ const user = useUser()
               </div>
             </li>
 
-            <li class="nav-item" v-else>
+            <li
+              class="nav-item"
+              v-else>
               <NuxtLink
                 class="nav-link"
                 to="/login"
@@ -121,17 +132,23 @@ const user = useUser()
                 class="dropdown-menu"
                 aria-labelledby="admin-panel-navbarDropdownMenuLink">
                 <li>
-                  <NuxtLink class="dropdown-item" to="/admin/productlist"
+                  <NuxtLink
+                    class="dropdown-item"
+                    to="/admin/productlist"
                     >Products</NuxtLink
                   >
                 </li>
                 <li>
-                  <NuxtLink class="dropdown-item" to="/admin/userlist"
+                  <NuxtLink
+                    class="dropdown-item"
+                    to="/admin/userlist"
                     >Users</NuxtLink
                   >
                 </li>
                 <li>
-                  <NuxtLink class="dropdown-item" to="/admin/orderlist"
+                  <NuxtLink
+                    class="dropdown-item"
+                    to="/admin/orderlist"
                     >Orders</NuxtLink
                   >
                 </li>

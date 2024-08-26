@@ -17,10 +17,10 @@ main {
 }
 
 .product-title {
-  height: 2.5em; /* Set a fixed height */
-  overflow: hidden; /* Hide overflow content */
-  text-overflow: ellipsis; /* Add ellipsis for long text */
-  white-space: nowrap; /* Prevent wrapping */
+  height: 2.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 table td,
@@ -60,4 +60,47 @@ table th {
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+.product-title .product-name:hover::after {
+  content: attr(data-full-title);
+  position: absolute;
+  background-color: rgba(133, 132, 132, 0.4);
+  color: rgb(90, 90, 90);
+  padding: 5px;
+  border-radius: 5px;
+  width: auto;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  clear: both;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 1;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.product-title:hover .product-name:hover::after {
+  display: block;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.product-image > img {
+  object-fit: contain;
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.caroimg {
+  width: 100%;
+  height: 480px;
+  object-fit: contain;
+  transition: opacity 0.5s ease-in-out;
 }

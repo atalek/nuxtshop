@@ -8,6 +8,8 @@ const { data } = await useAsyncData(
       params: {
         page: page.value,
       },
+      server: true,
+      lazy: true,
     }),
   { watch: [page] },
 )
@@ -20,7 +22,6 @@ function refetch(pageNumber: number) {
 <template>
   <div>
     <ProductCarousel />
-
     <h1>Latest Products</h1>
     <div class="row py-3">
       <div
@@ -29,7 +30,10 @@ function refetch(pageNumber: number) {
         :key="product._id">
         <Product :product="product" />
       </div>
-      <Paginate @change="refetch" :pages="data!.pages" :page="page" />
+      <Paginate
+        @change="refetch"
+        :pages="data!.pages"
+        :page="page" />
     </div>
   </div>
 </template>

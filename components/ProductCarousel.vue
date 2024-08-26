@@ -1,32 +1,19 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
-import { useProductStore } from '~/stores/products'
-
-const productStore = useProductStore()
-await productStore.fetchTopProducts()
-
-const products = computed(() => productStore.topProducts)
-const imageLoaded = ref<Record<string, boolean>>({})
-
-function onImageLoad(id: string) {
-  imageLoaded.value[id] = true
-}
+const { data: products, status } = await useFetch('/api/v1/products/top', {
+  server: true,
+  lazy: true,
+})
 </script>
 
 <template>
   <div
+    v-if="status === 'pending'"
+    class="skeleton"></div>
+  <div
+    v-else
     id="carouselExampleDark"
     class="carousel carousel-dark slide mb-2"
     data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button
-        v-for="(product, index) in products"
-        :key="index"
-        :data-bs-target="'#carouselExampleDark'"
-        :data-bs-slide-to="index"
-        :class="{ active: index === 0 }"
-        aria-label="Slide {{ index + 1 }}"></button>
-    </div>
     <div class="carousel-inner">
       <div
         v-for="(product, index) in products"
@@ -35,19 +22,15 @@ function onImageLoad(id: string) {
         :data-bs-interval="index === 0 ? 5000 : 3000">
         <NuxtLink :to="`/product/${product._id}`">
           <div class="image-container">
-            <div
-              class="placeholder"
-              v-if="!imageLoaded[product._id]"></div>
             <NuxtImg
               provider="cloudinary"
               :src="product.image"
               class="d-block caroimg img-fluid"
               :alt="product.name"
-              @load="onImageLoad(product._id)"
-              :class="{
-                'opacity-100': imageLoaded[product._id],
-                'opacity-0': !imageLoaded[product._id],
-              }" />
+              height="480"
+              width="480"
+              format="webp"
+              fetchpriority="high" />
           </div>
           <div class="carousel-caption">
             <h2 class="text-white">{{ product.name }}</h2>
@@ -80,20 +63,22 @@ function onImageLoad(id: string) {
 </template>
 
 <style scoped>
-.image-container {
-  position: relative;
-  overflow: hidden;
-}
-
-.caroimg {
+.skeleton {
+  background: #f0f0f0;
+  height: 480px;
   width: 100%;
-  height: auto;
-  max-height: 480px;
-  object-fit: contain;
-  transition: opacity 0.5s ease-in-out;
+  animation: pulse 1.5s infinite;
 }
 
-.carousel-caption {
-  background: rgba(0, 0, 0, 0.25);
+@keyframes pulse {
+  0% {
+    background-color: #f0f0f0;
+  }
+  50% {
+    background-color: #e0e0e0;
+  }
+  100% {
+    background-color: #f0f0f0;
+  }
 }
 </style>

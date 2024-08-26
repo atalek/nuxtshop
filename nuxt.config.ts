@@ -5,7 +5,9 @@ export default defineNuxtConfig({
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
-      script: [{ src: 'https://upload-widget.cloudinary.com/global/all.js' }],
+      script: [
+        { src: 'https://upload-widget.cloudinary.com/global/all.js', defer: true },
+      ],
     },
   },
 
@@ -39,7 +41,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': { isr: 3600 * 24 },
+    '/': { prerender: true },
     '/product/**': { isr: 3600 },
     '/login': { prerender: true },
     '/register': { prerender: true },
