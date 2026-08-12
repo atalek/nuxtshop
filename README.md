@@ -1,3 +1,5 @@
+
+
 # NuxtShop eCommerce Platform
 
 ![Landing page](https://res.cloudinary.com/dkofkuquf/image/upload/v1711042501/nuxtshop/nk9tzzyx71jsflhu9oar.webp)
@@ -75,8 +77,8 @@ Inspired by Traversy Media's ProShop v2 course, rebuilt fully with Nuxt 3.
    # NODE_ENV
    NODE_ENV=development
 
-    # BASE_URL
-   BASE_URL = 'http://localhost:3000' for development
+   # BASE_URL
+   BASE_URL=http://localhost:3000
 
    ```
 
